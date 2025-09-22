@@ -148,45 +148,30 @@ const LoanCalculator = () => {
     </div>
     
     <!-- Результат расчета -->
-    <div id="results" style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(59, 130, 246, 0.05) 50%, rgba(34, 197, 94, 0.05) 100%); padding: 24px; border-radius: 16px; border: 2px solid rgba(30, 64, 175, 0.2); margin-bottom: 24px;">
-      <div style="text-align: center; margin-bottom: 20px;">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 8px; color: #1e40af; font-weight: 600; margin-bottom: 16px;">
-          <span>🎯</span>
-          <span>Результат расчёта</span>
+    <div id="results" style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(59, 130, 246, 0.05) 50%, rgba(34, 197, 94, 0.05) 100%); padding: 32px; border-radius: 20px; border: 2px solid rgba(30, 64, 175, 0.2);">
+      <div style="text-align: center;">
+        
+        <div style="background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); padding: 32px; border-radius: 20px; border: 2px solid rgba(255, 255, 255, 0.5); margin-bottom: 32px;">
+          <div style="font-size: 22px; color: #64748b; margin-bottom: 16px;" id="returnDate">К возврату 05.10.2024</div>
+          <div style="font-size: 56px; font-weight: 700; color: #1e40af; line-height: 1;" id="resultTotal">12 100 ₽</div>
         </div>
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
-          <div style="text-align: center;">
-            <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;">Получите</div>
-            <div style="font-size: 24px; font-weight: 700; color: #059669;" id="resultReceive">10 000 ₽</div>
-          </div>
-          <div style="text-align: center;">
-            <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;">Переплата</div>
-            <div style="font-size: 24px; font-weight: 700; color: #ea580c;" id="resultOverpay">2 100 ₽</div>
-          </div>
-        </div>
-        
-        <div style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); padding: 16px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.5);">
-          <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;" id="returnDate">К возврату 05.10.2024</div>
-          <div style="font-size: 32px; font-weight: 700; color: #1e40af;" id="resultTotal">12 100 ₽</div>
-        </div>
-        
-        <div style="display: flex; justify-content: center; gap: 16px; margin-top: 16px; background: rgba(255, 255, 255, 0.5); padding: 12px; border-radius: 8px;">
-          <div style="display: flex; align-items: center; gap: 4px; font-size: 14px; color: #64748b;">
-            <span>%</span>
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; background: rgba(255, 255, 255, 0.5); padding: 24px; border-radius: 16px;">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 20px; color: #64748b;">
+            <span style="font-size: 24px;">%</span>
             <span>Ставка 1,5% в день</span>
           </div>
-          <div style="display: flex; align-items: center; gap: 4px; font-size: 14px; color: #64748b;">
-            <span>🛡️</span>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 20px; color: #64748b;">
+            <span style="font-size: 24px;">🛡️</span>
             <span>Без комиссий</span>
           </div>
         </div>
         
         <button 
           onclick="submitApplication()"
-          style="width: 100%; margin-top: 16px; height: 48px; background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: 600; cursor: pointer; transition: transform 0.2s;"
-          onmouseover="this.style.transform='scale(1.02)'"
-          onmouseout="this.style.transform='scale(1)'"
+          style="width: 100%; height: 72px; background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; border: none; border-radius: 20px; font-size: 28px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 12px 30px rgba(30, 64, 175, 0.3);"
+          onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 16px 40px rgba(30, 64, 175, 0.4)'"
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 12px 30px rgba(30, 64, 175, 0.3)'"
         >
           📤 Получить займ сейчас
         </button>
@@ -222,8 +207,6 @@ function calculateLoan() {
   const formattedDate = returnDate.toLocaleDateString('ru-RU');
   
   // Обновляем результаты
-  document.getElementById('resultReceive').textContent = amount.toLocaleString('ru-RU') + ' ₽';
-  document.getElementById('resultOverpay').textContent = interest.toLocaleString('ru-RU') + ' ₽';
   document.getElementById('resultTotal').textContent = total.toLocaleString('ru-RU') + ' ₽';
   document.getElementById('returnDate').textContent = 'К возврату ' + formattedDate;
   
@@ -285,18 +268,21 @@ input[type="range"]::-moz-range-thumb {
     min-height: 100vh !important;
     padding: 20px !important;
   }
-  div[style*="font-size: 48px"] {
-    font-size: 36px !important;
+  div[style*="font-size: 56px"] {
+    font-size: 40px !important;
   }
-  div[style*="font-size: 40px"] {
-    font-size: 32px !important;
-  }
-  div[style*="grid-template-columns: 1fr"] {
-    gap: 16px !important;
-  }
-  button[style*="height: 64px"] {
-    height: 56px !important;
+  div[style*="font-size: 28px"] {
     font-size: 20px !important;
+  }
+  div[style*="font-size: 22px"] {
+    font-size: 18px !important;
+  }
+  button[style*="height: 72px"] {
+    height: 60px !important;
+    font-size: 22px !important;
+  }
+  div[style*="flex-direction: column"] {
+    gap: 12px !important;
   }
 }
 </style>`;
