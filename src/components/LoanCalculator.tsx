@@ -177,14 +177,10 @@ function calculateLoan() {
         </div>
 
         <Tabs defaultValue="calculator" className="w-full">
-          <TabsList className="grid grid-cols-3 w-full max-w-md mx-auto">
+          <TabsList className="grid grid-cols-2 w-full max-w-md mx-auto">
             <TabsTrigger value="calculator">
               <Icon name="Calculator" size={16} className="mr-2" />
               Калькулятор
-            </TabsTrigger>
-            <TabsTrigger value="schedule">
-              <Icon name="Calendar" size={16} className="mr-2" />
-              График
             </TabsTrigger>
             <TabsTrigger value="embed">
               <Icon name="Code" size={16} className="mr-2" />
@@ -325,46 +321,7 @@ function calculateLoan() {
             </div>
           </TabsContent>
 
-          <TabsContent value="schedule" className="space-y-6">
-            {calculation && (
-              <Card className="animate-fade-in">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Icon name="Calendar" size={20} />
-                    График платежей
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>День</TableHead>
-                        <TableHead>Дата</TableHead>
-                        <TableHead>Основной долг</TableHead>
-                        <TableHead>Проценты</TableHead>
-                        <TableHead>Итого</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {calculation.schedule.map((payment) => (
-                        <TableRow key={payment.day}>
-                          <TableCell className="font-medium">{payment.day}</TableCell>
-                          <TableCell>{payment.date}</TableCell>
-                          <TableCell>{payment.amount.toLocaleString('ru-RU')} ₽</TableCell>
-                          <TableCell className="text-red-600">
-                            {payment.interest.toLocaleString('ru-RU')} ₽
-                          </TableCell>
-                          <TableCell className="font-semibold">
-                            {payment.total.toLocaleString('ru-RU')} ₽
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            )}
-          </TabsContent>
+
 
           <TabsContent value="embed" className="space-y-6">
             <Card className="animate-fade-in">
