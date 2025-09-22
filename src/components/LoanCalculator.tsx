@@ -303,81 +303,81 @@ input[type="range"]::-moz-range-thumb {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="max-w-6xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gray-50 p-0 md:p-4 flex flex-col">
+      <div className="flex-1 flex flex-col max-w-6xl mx-auto w-full">
         {/* Header */}
-        <div className="text-center space-y-2 animate-fade-in">
-          <h1 className="text-3xl font-bold text-primary">Калькулятор займов МФО</h1>
-          <p className="text-gray-600">Экспресс займы до 15 000 ₽ на срок до 14 дней</p>
+        <div className="text-center space-y-2 animate-fade-in p-4 md:p-0 md:mb-6">
+          <h1 className="text-2xl md:text-3xl font-bold text-primary">Калькулятор займов МФО</h1>
+          <p className="text-gray-600 text-sm md:text-base">Экспресс займы до 15 000 ₽ на срок до 14 дней</p>
         </div>
 
-        <Tabs defaultValue="calculator" className="w-full">
-          <TabsList className="grid grid-cols-2 w-full max-w-md mx-auto">
-            <TabsTrigger value="calculator">
+        <Tabs defaultValue="calculator" className="w-full h-full">
+          <TabsList className="grid grid-cols-2 w-full max-w-md mx-auto md:mb-6">
+            <TabsTrigger value="calculator" className="md:text-base">
               <Icon name="Calculator" size={16} className="mr-2" />
               Калькулятор
             </TabsTrigger>
-            <TabsTrigger value="embed">
+            <TabsTrigger value="embed" className="md:text-base">
               <Icon name="Code" size={16} className="mr-2" />
               Код
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="calculator" className="space-y-6">
-            <div className="w-full max-w-4xl mx-auto px-4">
+          <TabsContent value="calculator" className="flex-1 flex flex-col h-full">
+            <div className="flex-1 flex flex-col w-full max-w-4xl mx-auto px-4 pb-4 md:pb-8">
               {/* Калькулятор */}
-              <Card className="animate-scale-in min-h-screen md:min-h-0 flex flex-col">
-                <CardHeader className="text-center pb-6 md:pb-8">
-                  <CardTitle className="text-3xl md:text-4xl font-bold text-primary">
+              <Card className="animate-scale-in flex-1 flex flex-col h-full min-h-[calc(100vh-120px)] md:min-h-0 border-0 md:border shadow-none md:shadow-sm">
+                <CardHeader className="text-center pb-4 md:pb-8 px-4 md:px-6 pt-4 md:pt-6">
+                  <CardTitle className="text-2xl md:text-4xl font-bold text-primary">
                     Рассчитайте свой займ
                   </CardTitle>
-                  <p className="text-gray-600 mt-2 text-lg md:text-xl">Выберите удобную сумму и срок</p>
+                  <p className="text-gray-600 mt-2 text-base md:text-xl">Выберите удобную сумму и срок</p>
                 </CardHeader>
-                <CardContent className="flex-1 flex flex-col justify-center space-y-12 md:space-y-16 px-6 md:px-8">
-                  <div className="space-y-12 md:space-y-16">
+                <CardContent className="flex-1 flex flex-col justify-center space-y-8 md:space-y-16 px-4 md:px-8 pb-6 md:pb-8">
+                  <div className="flex-1 flex flex-col justify-evenly space-y-6 md:space-y-16">
                     {/* Сумма займа */}
-                    <div className="space-y-6">
+                    <div className="space-y-4 md:space-y-6">
                       <div className="text-center">
-                        <Label className="text-2xl md:text-3xl font-semibold text-gray-700 block mb-4">Сумма займа</Label>
-                        <div className="text-5xl md:text-6xl font-bold text-primary mt-4">
+                        <Label className="text-xl md:text-3xl font-semibold text-gray-700 block mb-3 md:mb-4">Сумма займа</Label>
+                        <div className="text-4xl md:text-6xl font-bold text-primary">
                           {loanAmount.toLocaleString('ru-RU')} ₽
                         </div>
                       </div>
-                      <div className="px-4">
+                      <div className="px-2 md:px-4">
                         <Slider
                           value={[loanAmount]}
                           onValueChange={(value) => setLoanAmount(value[0])}
                           min={1000}
                           max={MAX_AMOUNT}
                           step={500}
-                          className="w-full h-4 md:h-6"
+                          className="w-full h-3 md:h-6"
                         />
                       </div>
-                      <div className="flex justify-between text-lg md:text-xl text-gray-500 px-4">
+                      <div className="flex justify-between text-base md:text-xl text-gray-500 px-2 md:px-4">
                         <span>1 000 ₽</span>
                         <span>15 000 ₽</span>
                       </div>
                     </div>
 
                     {/* Срок займа */}
-                    <div className="space-y-6">
+                    <div className="space-y-4 md:space-y-6">
                       <div className="text-center">
-                        <Label className="text-2xl md:text-3xl font-semibold text-gray-700 block mb-4">Срок займа</Label>
-                        <div className="text-5xl md:text-6xl font-bold text-primary mt-4">
+                        <Label className="text-xl md:text-3xl font-semibold text-gray-700 block mb-3 md:mb-4">Срок займа</Label>
+                        <div className="text-4xl md:text-6xl font-bold text-primary">
                           {term} {term === 1 ? 'день' : term < 5 ? 'дня' : 'дней'}
                         </div>
                       </div>
-                      <div className="px-4">
+                      <div className="px-2 md:px-4">
                         <Slider
                           value={[term]}
                           onValueChange={(value) => setTerm(value[0])}
                           min={1}
                           max={MAX_TERM}
                           step={1}
-                          className="w-full h-4 md:h-6"
+                          className="w-full h-3 md:h-6"
                         />
                       </div>
-                      <div className="flex justify-between text-lg md:text-xl text-gray-500 px-4">
+                      <div className="flex justify-between text-base md:text-xl text-gray-500 px-2 md:px-4">
                         <span>1 день</span>
                         <span>14 дней</span>
                       </div>
@@ -386,52 +386,52 @@ input[type="range"]::-moz-range-thumb {
 
                   {/* Результат расчета */}
                   {calculation && (
-                    <div className="bg-gradient-to-br from-primary/5 via-blue-50 to-green-50 p-8 md:p-10 rounded-xl border-2 border-primary/20">
-                      <div className="text-center space-y-6 md:space-y-8">
-                        <div className="flex items-center justify-center gap-2 text-primary font-semibold text-xl md:text-2xl">
-                          <Icon name="Target" size={24} />
+                    <div className="bg-gradient-to-br from-primary/5 via-blue-50 to-green-50 p-4 md:p-10 rounded-xl border-2 border-primary/20">
+                      <div className="text-center space-y-4 md:space-y-8">
+                        <div className="flex items-center justify-center gap-2 text-primary font-semibold text-lg md:text-2xl">
+                          <Icon name="Target" size={20} className="md:w-6 md:h-6" />
                           <span>Результат расчёта</span>
                         </div>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 text-center">
-                          <div className="bg-white/60 p-6 rounded-lg">
-                            <div className="text-lg md:text-xl text-gray-600 mb-2">Получите</div>
-                            <div className="text-4xl md:text-5xl font-bold text-green-600">
+                        <div className="grid grid-cols-2 gap-3 md:gap-8 text-center">
+                          <div className="bg-white/60 p-3 md:p-6 rounded-lg">
+                            <div className="text-sm md:text-xl text-gray-600 mb-1 md:mb-2">Получите</div>
+                            <div className="text-2xl md:text-5xl font-bold text-green-600">
                               {calculation.loanAmount.toLocaleString('ru-RU')} ₽
                             </div>
                           </div>
-                          <div className="bg-white/60 p-6 rounded-lg">
-                            <div className="text-lg md:text-xl text-gray-600 mb-2">Переплата</div>
-                            <div className="text-4xl md:text-5xl font-bold text-orange-600">
+                          <div className="bg-white/60 p-3 md:p-6 rounded-lg">
+                            <div className="text-sm md:text-xl text-gray-600 mb-1 md:mb-2">Переплата</div>
+                            <div className="text-2xl md:text-5xl font-bold text-orange-600">
                               {calculation.totalInterest.toLocaleString('ru-RU')} ₽
                             </div>
                           </div>
                         </div>
                         
-                        <div className="bg-white/70 backdrop-blur-sm p-6 md:p-8 rounded-lg border">
-                          <div className="text-lg md:text-xl text-gray-600 mb-2">К возврату {calculation.returnDate}</div>
-                          <div className="text-5xl md:text-6xl font-bold text-primary">
+                        <div className="bg-white/70 backdrop-blur-sm p-4 md:p-8 rounded-lg border">
+                          <div className="text-sm md:text-xl text-gray-600 mb-1 md:mb-2">К возврату {calculation.returnDate}</div>
+                          <div className="text-3xl md:text-6xl font-bold text-primary">
                             {calculation.totalAmount.toLocaleString('ru-RU')} ₽
                           </div>
                         </div>
 
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-lg text-gray-600 bg-white/50 p-4 md:p-6 rounded-lg">
-                          <div className="flex items-center gap-2">
-                            <Icon name="Percent" size={18} />
+                        <div className="flex flex-col gap-2 md:flex-row md:gap-8 items-center justify-center text-sm md:text-lg text-gray-600 bg-white/50 p-3 md:p-6 rounded-lg">
+                          <div className="flex items-center gap-1 md:gap-2">
+                            <Icon name="Percent" size={14} className="md:w-5 md:h-5" />
                             <span>Ставка 1,5% в день</span>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <Icon name="Shield" size={18} />
+                          <div className="flex items-center gap-1 md:gap-2">
+                            <Icon name="Shield" size={14} className="md:w-5 md:h-5" />
                             <span>Без комиссий</span>
                           </div>
                         </div>
 
                         <Button 
-                          className="w-full mt-6 h-16 md:h-20 text-xl md:text-2xl font-semibold" 
+                          className="w-full mt-4 md:mt-6 h-14 md:h-20 text-lg md:text-2xl font-semibold" 
                           size="lg"
                           onClick={() => window.open('https://www.money-financei.ru/theapplicationisoffline', '_blank')}
                         >
-                          <Icon name="Send" size={24} className="mr-3" />
+                          <Icon name="Send" size={20} className="mr-2 md:mr-3 md:w-6 md:h-6" />
                           Получить займ сейчас
                         </Button>
                       </div>
