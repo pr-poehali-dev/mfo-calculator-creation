@@ -189,21 +189,22 @@ function calculateLoan() {
           </TabsList>
 
           <TabsContent value="calculator" className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="max-w-2xl mx-auto">
               {/* Калькулятор */}
               <Card className="animate-scale-in">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Icon name="Calculator" size={20} />
-                    Параметры займа
+                <CardHeader className="text-center pb-6">
+                  <CardTitle className="text-2xl font-bold text-primary">
+                    Рассчитайте свой займ
                   </CardTitle>
+                  <p className="text-gray-600 mt-2">Выберите удобную сумму и срок</p>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="space-y-4">
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center">
-                        <Label className="text-base font-medium">Сумма займа</Label>
-                        <div className="text-xl font-bold text-primary">
+                <CardContent className="space-y-8">
+                  <div className="space-y-8">
+                    {/* Сумма займа */}
+                    <div className="space-y-4">
+                      <div className="text-center">
+                        <Label className="text-lg font-semibold text-gray-700">Сумма займа</Label>
+                        <div className="text-4xl font-bold text-primary mt-2">
                           {loanAmount.toLocaleString('ru-RU')} ₽
                         </div>
                       </div>
@@ -213,7 +214,7 @@ function calculateLoan() {
                         min={1000}
                         max={MAX_AMOUNT}
                         step={500}
-                        className="w-full"
+                        className="w-full h-3"
                       />
                       <div className="flex justify-between text-sm text-gray-500">
                         <span>1 000 ₽</span>
@@ -221,10 +222,11 @@ function calculateLoan() {
                       </div>
                     </div>
 
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center">
-                        <Label className="text-base font-medium">Срок займа</Label>
-                        <div className="text-xl font-bold text-primary">
+                    {/* Срок займа */}
+                    <div className="space-y-4">
+                      <div className="text-center">
+                        <Label className="text-lg font-semibold text-gray-700">Срок займа</Label>
+                        <div className="text-4xl font-bold text-primary mt-2">
                           {term} {term === 1 ? 'день' : term < 5 ? 'дня' : 'дней'}
                         </div>
                       </div>
@@ -234,7 +236,7 @@ function calculateLoan() {
                         min={1}
                         max={MAX_TERM}
                         step={1}
-                        className="w-full"
+                        className="w-full h-3"
                       />
                       <div className="flex justify-between text-sm text-gray-500">
                         <span>1 день</span>
@@ -243,77 +245,57 @@ function calculateLoan() {
                     </div>
                   </div>
 
-                  <div className="bg-blue-50 p-4 rounded-lg">
-                    <div className="flex items-center gap-2 text-blue-700 font-medium">
-                      <Icon name="Info" size={16} />
-                      Условия займа
-                    </div>
-                    <div className="mt-2 space-y-1 text-sm text-blue-600">
-                      <div>• Ставка: 1,5% в день</div>
-                      <div>• Без скрытых комиссий</div>
-                      <div>• Быстрое одобрение</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Результаты */}
-              <Card className="animate-scale-in">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Icon name="Target" size={20} />
-                    Расчёт займа
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
+                  {/* Результат расчета */}
                   {calculation && (
-                    <div className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="text-center p-4 bg-blue-50 rounded-lg">
-                          <div className="text-sm text-gray-600 mb-1">Сумма займа</div>
-                          <div className="text-2xl font-bold text-blue-600">
-                            {calculation.loanAmount.toLocaleString('ru-RU')} ₽
+                    <div className="bg-gradient-to-br from-primary/5 via-blue-50 to-green-50 p-6 rounded-xl border-2 border-primary/20">
+                      <div className="text-center space-y-4">
+                        <div className="flex items-center justify-center gap-2 text-primary font-semibold">
+                          <Icon name="Target" size={20} />
+                          <span>Результат расчёта</span>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-4 text-center">
+                          <div>
+                            <div className="text-sm text-gray-600 mb-1">Получите</div>
+                            <div className="text-2xl font-bold text-green-600">
+                              {calculation.loanAmount.toLocaleString('ru-RU')} ₽
+                            </div>
+                          </div>
+                          <div>
+                            <div className="text-sm text-gray-600 mb-1">Переплата</div>
+                            <div className="text-2xl font-bold text-orange-600">
+                              {calculation.totalInterest.toLocaleString('ru-RU')} ₽
+                            </div>
                           </div>
                         </div>
-                        <div className="text-center p-4 bg-green-50 rounded-lg">
-                          <div className="text-sm text-gray-600 mb-1">Срок</div>
-                          <div className="text-2xl font-bold text-green-600">
-                            {calculation.term} дн.
-                          </div>
-                        </div>
-                      </div>
-
-                      <Separator />
-
-                      <div className="space-y-3">
-                        <div className="flex justify-between items-center">
-                          <span className="text-gray-600">Переплата:</span>
-                          <span className="text-lg font-semibold text-red-600">
-                            {calculation.totalInterest.toLocaleString('ru-RU')} ₽
-                          </span>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-gray-600">К возврату:</span>
-                          <span className="text-xl font-bold text-green-600">
+                        
+                        <div className="bg-white/70 backdrop-blur-sm p-4 rounded-lg border">
+                          <div className="text-sm text-gray-600 mb-1">К возврату {calculation.returnDate}</div>
+                          <div className="text-3xl font-bold text-primary">
                             {calculation.totalAmount.toLocaleString('ru-RU')} ₽
-                          </span>
+                          </div>
                         </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-gray-600">Ежедневный платёж:</span>
-                          <Badge variant="outline" className="text-sm">
-                            {calculation.dailyPayment.toLocaleString('ru-RU')} ₽/день
-                          </Badge>
-                        </div>
-                      </div>
 
-                      <Button 
-                        className="w-full mt-6" 
-                        size="lg"
-                        onClick={() => setShowApplication(true)}
-                      >
-                        <Icon name="Send" size={16} className="mr-2" />
-                        Подать заявку
-                      </Button>
+                        <div className="flex items-center justify-center gap-4 text-sm text-gray-600 bg-white/50 p-3 rounded-lg">
+                          <div className="flex items-center gap-1">
+                            <Icon name="Percent" size={14} />
+                            <span>Ставка 1,5% в день</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Icon name="Shield" size={14} />
+                            <span>Без комиссий</span>
+                          </div>
+                        </div>
+
+                        <Button 
+                          className="w-full mt-4 h-12 text-lg font-semibold" 
+                          size="lg"
+                          onClick={() => setShowApplication(true)}
+                        >
+                          <Icon name="Send" size={18} className="mr-2" />
+                          Получить займ сейчас
+                        </Button>
+                      </div>
                     </div>
                   )}
                 </CardContent>
