@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Slider } from '@/components/ui/slider';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -201,38 +202,48 @@ function calculateLoan() {
                     Параметры займа
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="amount">Сумма займа (₽)</Label>
-                    <Input
-                      id="amount"
-                      type="number"
-                      value={loanAmount}
-                      onChange={(e) => setLoanAmount(Number(e.target.value))}
-                      min={1000}
-                      max={MAX_AMOUNT}
-                      className="text-lg"
-                    />
-                    <div className="flex justify-between text-sm text-gray-500">
-                      <span>Минимум: 1 000 ₽</span>
-                      <span>Максимум: 15 000 ₽</span>
+                <CardContent className="space-y-6">
+                  <div className="space-y-4">
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <Label className="text-base font-medium">Сумма займа</Label>
+                        <div className="text-xl font-bold text-primary">
+                          {loanAmount.toLocaleString('ru-RU')} ₽
+                        </div>
+                      </div>
+                      <Slider
+                        value={[loanAmount]}
+                        onValueChange={(value) => setLoanAmount(value[0])}
+                        min={1000}
+                        max={MAX_AMOUNT}
+                        step={500}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between text-sm text-gray-500">
+                        <span>1 000 ₽</span>
+                        <span>15 000 ₽</span>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="term">Срок займа (дней)</Label>
-                    <Input
-                      id="term"
-                      type="number"
-                      value={term}
-                      onChange={(e) => setTerm(Number(e.target.value))}
-                      min={1}
-                      max={MAX_TERM}
-                      className="text-lg"
-                    />
-                    <div className="flex justify-between text-sm text-gray-500">
-                      <span>Минимум: 1 день</span>
-                      <span>Максимум: 14 дней</span>
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <Label className="text-base font-medium">Срок займа</Label>
+                        <div className="text-xl font-bold text-primary">
+                          {term} {term === 1 ? 'день' : term < 5 ? 'дня' : 'дней'}
+                        </div>
+                      </div>
+                      <Slider
+                        value={[term]}
+                        onValueChange={(value) => setTerm(value[0])}
+                        min={1}
+                        max={MAX_TERM}
+                        step={1}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between text-sm text-gray-500">
+                        <span>1 день</span>
+                        <span>14 дней</span>
+                      </div>
                     </div>
                   </div>
 
