@@ -386,52 +386,33 @@ input[type="range"]::-moz-range-thumb {
 
                   {/* Результат расчета */}
                   {calculation && (
-                    <div className="bg-gradient-to-br from-primary/5 via-blue-50 to-green-50 p-4 md:p-10 rounded-xl border-2 border-primary/20">
-                      <div className="text-center space-y-4 md:space-y-8">
-                        <div className="flex items-center justify-center gap-2 text-primary font-semibold text-lg md:text-2xl">
-                          <Icon name="Target" size={20} className="md:w-6 md:h-6" />
-                          <span>Результат расчёта</span>
-                        </div>
+                    <div className="bg-gradient-to-br from-primary/5 via-blue-50 to-green-50 p-6 md:p-10 rounded-xl border-2 border-primary/20">
+                      <div className="text-center space-y-6 md:space-y-8">
                         
-                        <div className="grid grid-cols-2 gap-3 md:gap-8 text-center">
-                          <div className="bg-white/60 p-3 md:p-6 rounded-lg">
-                            <div className="text-sm md:text-xl text-gray-600 mb-1 md:mb-2">Получите</div>
-                            <div className="text-2xl md:text-5xl font-bold text-green-600">
-                              {calculation.loanAmount.toLocaleString('ru-RU')} ₽
-                            </div>
-                          </div>
-                          <div className="bg-white/60 p-3 md:p-6 rounded-lg">
-                            <div className="text-sm md:text-xl text-gray-600 mb-1 md:mb-2">Переплата</div>
-                            <div className="text-2xl md:text-5xl font-bold text-orange-600">
-                              {calculation.totalInterest.toLocaleString('ru-RU')} ₽
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="bg-white/70 backdrop-blur-sm p-4 md:p-8 rounded-lg border">
-                          <div className="text-sm md:text-xl text-gray-600 mb-1 md:mb-2">К возврату {calculation.returnDate}</div>
-                          <div className="text-3xl md:text-6xl font-bold text-primary">
+                        <div className="bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-xl border-2 border-white/50">
+                          <div className="text-lg md:text-2xl text-gray-600 mb-3 md:mb-4">К возврату {calculation.returnDate}</div>
+                          <div className="text-5xl md:text-7xl font-bold text-primary">
                             {calculation.totalAmount.toLocaleString('ru-RU')} ₽
                           </div>
                         </div>
 
-                        <div className="flex flex-col gap-2 md:flex-row md:gap-8 items-center justify-center text-sm md:text-lg text-gray-600 bg-white/50 p-3 md:p-6 rounded-lg">
-                          <div className="flex items-center gap-1 md:gap-2">
-                            <Icon name="Percent" size={14} className="md:w-5 md:h-5" />
+                        <div className="flex flex-col gap-3 md:flex-row md:gap-8 items-center justify-center text-base md:text-xl text-gray-600 bg-white/50 p-4 md:p-6 rounded-lg">
+                          <div className="flex items-center gap-2">
+                            <Icon name="Percent" size={16} className="md:w-6 md:h-6" />
                             <span>Ставка 1,5% в день</span>
                           </div>
-                          <div className="flex items-center gap-1 md:gap-2">
-                            <Icon name="Shield" size={14} className="md:w-5 md:h-5" />
+                          <div className="flex items-center gap-2">
+                            <Icon name="Shield" size={16} className="md:w-6 md:h-6" />
                             <span>Без комиссий</span>
                           </div>
                         </div>
 
                         <Button 
-                          className="w-full mt-4 md:mt-6 h-14 md:h-20 text-lg md:text-2xl font-semibold" 
+                          className="w-full h-16 md:h-24 text-xl md:text-3xl font-semibold" 
                           size="lg"
                           onClick={() => window.open('https://www.money-financei.ru/theapplicationisoffline', '_blank')}
                         >
-                          <Icon name="Send" size={20} className="mr-2 md:mr-3 md:w-6 md:h-6" />
+                          <Icon name="Send" size={24} className="mr-3 md:mr-4 md:w-8 md:h-8" />
                           Получить займ сейчас
                         </Button>
                       </div>
