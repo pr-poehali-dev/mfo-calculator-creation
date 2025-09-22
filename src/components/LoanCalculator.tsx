@@ -82,16 +82,17 @@ const LoanCalculator = () => {
   }, [loanAmount, term]);
 
   const generateEmbedCode = () => {
-    return `<!-- Калькулятор займов МФО - Обновленная версия -->
-<div style="max-width: 600px; margin: 0 auto; padding: 20px; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;">
-  <div style="background: #ffffff; border-radius: 16px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); padding: 32px; border: 1px solid #f1f5f9;">
+    return `<!-- Калькулятор займов МФО - Полноэкранная версия -->
+<div style="width: 100%; min-height: 100vh; margin: 0; padding: 20px; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
+<div style="width: 100%; max-width: 800px; margin: 0 auto;">
+  <div style="background: #ffffff; border-radius: 20px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); padding: 40px; border: 1px solid #f1f5f9; min-height: 90vh; display: flex; flex-direction: column; justify-content: center;">
     
     <!-- Заголовок -->
-    <div style="text-align: center; margin-bottom: 32px;">
-      <h2 style="color: #1e40af; font-size: 28px; font-weight: 700; margin: 0 0 8px 0;">
+    <div style="text-align: center; margin-bottom: 48px;">
+      <h2 style="color: #1e40af; font-size: 36px; font-weight: 700; margin: 0 0 12px 0; line-height: 1.2;">
         Рассчитайте свой займ
       </h2>
-      <p style="color: #64748b; margin: 0; font-size: 16px;">Выберите удобную сумму и срок</p>
+      <p style="color: #64748b; margin: 0; font-size: 20px;">Выберите удобную сумму и срок</p>
     </div>
     
     <!-- Сумма займа -->
@@ -102,17 +103,19 @@ const LoanCalculator = () => {
         </label>
         <div style="font-size: 32px; font-weight: 700; color: #1e40af;" id="displayAmount">10 000 ₽</div>
       </div>
-      <input 
-        type="range" 
-        min="1000" 
-        max="15000" 
-        step="500"
-        value="10000"
-        style="width: 100%; height: 8px; background: linear-gradient(to right, #1e40af 0%, #1e40af 60%, #e2e8f0 60%, #e2e8f0 100%); border-radius: 8px; outline: none; -webkit-appearance: none;"
-        oninput="updateAmount(this.value)"
-        id="loanAmountSlider"
-      />
-      <div style="display: flex; justify-content: space-between; font-size: 14px; color: #64748b; margin-top: 8px;">
+      <div style="padding: 0 20px;">
+        <input 
+          type="range" 
+          min="1000" 
+          max="15000" 
+          step="500"
+          value="10000"
+          style="width: 100%; height: 12px; background: linear-gradient(to right, #1e40af 0%, #1e40af 60%, #e2e8f0 60%, #e2e8f0 100%); border-radius: 12px; outline: none; -webkit-appearance: none;"
+          oninput="updateAmount(this.value)"
+          id="loanAmountSlider"
+        />
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 18px; color: #64748b; margin-top: 16px; padding: 0 20px;">
         <span>1 000 ₽</span>
         <span>15 000 ₽</span>
       </div>
@@ -126,17 +129,19 @@ const LoanCalculator = () => {
         </label>
         <div style="font-size: 32px; font-weight: 700; color: #1e40af;" id="displayTerm">14 дней</div>
       </div>
-      <input 
-        type="range" 
-        min="1" 
-        max="14" 
-        step="1"
-        value="14"
-        style="width: 100%; height: 8px; background: linear-gradient(to right, #1e40af 0%, #1e40af 100%, #e2e8f0 100%, #e2e8f0 100%); border-radius: 8px; outline: none; -webkit-appearance: none;"
-        oninput="updateTerm(this.value)"
-        id="termSlider"
-      />
-      <div style="display: flex; justify-content: space-between; font-size: 14px; color: #64748b; margin-top: 8px;">
+      <div style="padding: 0 20px;">
+        <input 
+          type="range" 
+          min="1" 
+          max="14" 
+          step="1"
+          value="14"
+          style="width: 100%; height: 12px; background: linear-gradient(to right, #1e40af 0%, #1e40af 100%, #e2e8f0 100%, #e2e8f0 100%); border-radius: 12px; outline: none; -webkit-appearance: none;"
+          oninput="updateTerm(this.value)"
+          id="termSlider"
+        />
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 18px; color: #64748b; margin-top: 16px; padding: 0 20px;">
         <span>1 день</span>
         <span>14 дней</span>
       </div>
@@ -233,8 +238,8 @@ function calculateLoan() {
 }
 
 function submitApplication() {
-  // Замените YOUR_APPLICATION_URL на ссылку вашей формы заявки
-  window.open('YOUR_APPLICATION_URL', '_blank');
+  // Открываем форму заявки
+  window.open('https://www.money-financei.ru/theapplicationisoffline', '_blank');
 }
 
 // Инициализация калькулятора при загрузке
@@ -248,33 +253,50 @@ document.addEventListener('DOMContentLoaded', function() {
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: #1e40af;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.4);
+  transform: scale(1.2);
+  box-shadow: 0 6px 20px rgba(30, 64, 175, 0.5);
 }
 
 input[type="range"]::-moz-range-thumb {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: #1e40af;
   cursor: pointer;
   border: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-@media (max-width: 640px) {
-  div[style*="grid-template-columns: 1fr 1fr"] {
-    grid-template-columns: 1fr !important;
+@media (max-width: 768px) {
+  div[style*="max-width: 800px"] {
+    padding: 10px !important;
+  }
+  div[style*="min-height: 90vh"] {
+    min-height: 100vh !important;
+    padding: 20px !important;
+  }
+  div[style*="font-size: 48px"] {
+    font-size: 36px !important;
+  }
+  div[style*="font-size: 40px"] {
+    font-size: 32px !important;
+  }
+  div[style*="grid-template-columns: 1fr"] {
+    gap: 16px !important;
+  }
+  button[style*="height: 64px"] {
+    height: 56px !important;
+    font-size: 20px !important;
   }
 }
 </style>`;
@@ -302,56 +324,60 @@ input[type="range"]::-moz-range-thumb {
           </TabsList>
 
           <TabsContent value="calculator" className="space-y-6">
-            <div className="max-w-2xl mx-auto">
+            <div className="w-full max-w-4xl mx-auto px-4">
               {/* Калькулятор */}
-              <Card className="animate-scale-in">
-                <CardHeader className="text-center pb-6">
-                  <CardTitle className="text-2xl font-bold text-primary">
+              <Card className="animate-scale-in min-h-screen md:min-h-0 flex flex-col">
+                <CardHeader className="text-center pb-6 md:pb-8">
+                  <CardTitle className="text-3xl md:text-4xl font-bold text-primary">
                     Рассчитайте свой займ
                   </CardTitle>
-                  <p className="text-gray-600 mt-2">Выберите удобную сумму и срок</p>
+                  <p className="text-gray-600 mt-2 text-lg md:text-xl">Выберите удобную сумму и срок</p>
                 </CardHeader>
-                <CardContent className="space-y-8">
-                  <div className="space-y-8">
+                <CardContent className="flex-1 flex flex-col justify-center space-y-12 md:space-y-16 px-6 md:px-8">
+                  <div className="space-y-12 md:space-y-16">
                     {/* Сумма займа */}
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                       <div className="text-center">
-                        <Label className="text-lg font-semibold text-gray-700">Сумма займа</Label>
-                        <div className="text-4xl font-bold text-primary mt-2">
+                        <Label className="text-2xl md:text-3xl font-semibold text-gray-700 block mb-4">Сумма займа</Label>
+                        <div className="text-5xl md:text-6xl font-bold text-primary mt-4">
                           {loanAmount.toLocaleString('ru-RU')} ₽
                         </div>
                       </div>
-                      <Slider
-                        value={[loanAmount]}
-                        onValueChange={(value) => setLoanAmount(value[0])}
-                        min={1000}
-                        max={MAX_AMOUNT}
-                        step={500}
-                        className="w-full h-3"
-                      />
-                      <div className="flex justify-between text-sm text-gray-500">
+                      <div className="px-4">
+                        <Slider
+                          value={[loanAmount]}
+                          onValueChange={(value) => setLoanAmount(value[0])}
+                          min={1000}
+                          max={MAX_AMOUNT}
+                          step={500}
+                          className="w-full h-4 md:h-6"
+                        />
+                      </div>
+                      <div className="flex justify-between text-lg md:text-xl text-gray-500 px-4">
                         <span>1 000 ₽</span>
                         <span>15 000 ₽</span>
                       </div>
                     </div>
 
                     {/* Срок займа */}
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                       <div className="text-center">
-                        <Label className="text-lg font-semibold text-gray-700">Срок займа</Label>
-                        <div className="text-4xl font-bold text-primary mt-2">
+                        <Label className="text-2xl md:text-3xl font-semibold text-gray-700 block mb-4">Срок займа</Label>
+                        <div className="text-5xl md:text-6xl font-bold text-primary mt-4">
                           {term} {term === 1 ? 'день' : term < 5 ? 'дня' : 'дней'}
                         </div>
                       </div>
-                      <Slider
-                        value={[term]}
-                        onValueChange={(value) => setTerm(value[0])}
-                        min={1}
-                        max={MAX_TERM}
-                        step={1}
-                        className="w-full h-3"
-                      />
-                      <div className="flex justify-between text-sm text-gray-500">
+                      <div className="px-4">
+                        <Slider
+                          value={[term]}
+                          onValueChange={(value) => setTerm(value[0])}
+                          min={1}
+                          max={MAX_TERM}
+                          step={1}
+                          className="w-full h-4 md:h-6"
+                        />
+                      </div>
+                      <div className="flex justify-between text-lg md:text-xl text-gray-500 px-4">
                         <span>1 день</span>
                         <span>14 дней</span>
                       </div>
@@ -360,52 +386,52 @@ input[type="range"]::-moz-range-thumb {
 
                   {/* Результат расчета */}
                   {calculation && (
-                    <div className="bg-gradient-to-br from-primary/5 via-blue-50 to-green-50 p-6 rounded-xl border-2 border-primary/20">
-                      <div className="text-center space-y-4">
-                        <div className="flex items-center justify-center gap-2 text-primary font-semibold">
-                          <Icon name="Target" size={20} />
+                    <div className="bg-gradient-to-br from-primary/5 via-blue-50 to-green-50 p-8 md:p-10 rounded-xl border-2 border-primary/20">
+                      <div className="text-center space-y-6 md:space-y-8">
+                        <div className="flex items-center justify-center gap-2 text-primary font-semibold text-xl md:text-2xl">
+                          <Icon name="Target" size={24} />
                           <span>Результат расчёта</span>
                         </div>
                         
-                        <div className="grid grid-cols-2 gap-4 text-center">
-                          <div>
-                            <div className="text-sm text-gray-600 mb-1">Получите</div>
-                            <div className="text-2xl font-bold text-green-600">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 text-center">
+                          <div className="bg-white/60 p-6 rounded-lg">
+                            <div className="text-lg md:text-xl text-gray-600 mb-2">Получите</div>
+                            <div className="text-4xl md:text-5xl font-bold text-green-600">
                               {calculation.loanAmount.toLocaleString('ru-RU')} ₽
                             </div>
                           </div>
-                          <div>
-                            <div className="text-sm text-gray-600 mb-1">Переплата</div>
-                            <div className="text-2xl font-bold text-orange-600">
+                          <div className="bg-white/60 p-6 rounded-lg">
+                            <div className="text-lg md:text-xl text-gray-600 mb-2">Переплата</div>
+                            <div className="text-4xl md:text-5xl font-bold text-orange-600">
                               {calculation.totalInterest.toLocaleString('ru-RU')} ₽
                             </div>
                           </div>
                         </div>
                         
-                        <div className="bg-white/70 backdrop-blur-sm p-4 rounded-lg border">
-                          <div className="text-sm text-gray-600 mb-1">К возврату {calculation.returnDate}</div>
-                          <div className="text-3xl font-bold text-primary">
+                        <div className="bg-white/70 backdrop-blur-sm p-6 md:p-8 rounded-lg border">
+                          <div className="text-lg md:text-xl text-gray-600 mb-2">К возврату {calculation.returnDate}</div>
+                          <div className="text-5xl md:text-6xl font-bold text-primary">
                             {calculation.totalAmount.toLocaleString('ru-RU')} ₽
                           </div>
                         </div>
 
-                        <div className="flex items-center justify-center gap-4 text-sm text-gray-600 bg-white/50 p-3 rounded-lg">
-                          <div className="flex items-center gap-1">
-                            <Icon name="Percent" size={14} />
+                        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-lg text-gray-600 bg-white/50 p-4 md:p-6 rounded-lg">
+                          <div className="flex items-center gap-2">
+                            <Icon name="Percent" size={18} />
                             <span>Ставка 1,5% в день</span>
                           </div>
-                          <div className="flex items-center gap-1">
-                            <Icon name="Shield" size={14} />
+                          <div className="flex items-center gap-2">
+                            <Icon name="Shield" size={18} />
                             <span>Без комиссий</span>
                           </div>
                         </div>
 
                         <Button 
-                          className="w-full mt-4 h-12 text-lg font-semibold" 
+                          className="w-full mt-6 h-16 md:h-20 text-xl md:text-2xl font-semibold" 
                           size="lg"
-                          onClick={() => setShowApplication(true)}
+                          onClick={() => window.open('https://www.money-financei.ru/theapplicationisoffline', '_blank')}
                         >
-                          <Icon name="Send" size={18} className="mr-2" />
+                          <Icon name="Send" size={24} className="mr-3" />
                           Получить займ сейчас
                         </Button>
                       </div>
