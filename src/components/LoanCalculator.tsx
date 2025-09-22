@@ -82,89 +82,202 @@ const LoanCalculator = () => {
   }, [loanAmount, term]);
 
   const generateEmbedCode = () => {
-    return `<!-- Калькулятор займов МФО -->
-<div style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: 'Roboto', sans-serif;">
-  <div style="background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 24px;">
-    <h2 style="color: #1e40af; font-size: 24px; font-weight: 600; margin-bottom: 20px; text-align: center;">
-      Калькулятор займов
-    </h2>
+    return `<!-- Калькулятор займов МФО - Обновленная версия -->
+<div style="max-width: 600px; margin: 0 auto; padding: 20px; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;">
+  <div style="background: #ffffff; border-radius: 16px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); padding: 32px; border: 1px solid #f1f5f9;">
     
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
-      <div>
-        <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #374151;">
-          Сумма займа (₽)
+    <!-- Заголовок -->
+    <div style="text-align: center; margin-bottom: 32px;">
+      <h2 style="color: #1e40af; font-size: 28px; font-weight: 700; margin: 0 0 8px 0;">
+        Рассчитайте свой займ
+      </h2>
+      <p style="color: #64748b; margin: 0; font-size: 16px;">Выберите удобную сумму и срок</p>
+    </div>
+    
+    <!-- Сумма займа -->
+    <div style="margin-bottom: 32px;">
+      <div style="text-align: center; margin-bottom: 16px;">
+        <label style="font-size: 18px; font-weight: 600; color: #374151; display: block; margin-bottom: 8px;">
+          Сумма займа
         </label>
-        <input 
-          type="number" 
-          min="1000" 
-          max="15000" 
-          value="10000"
-          style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 16px;"
-          onchange="calculateLoan()"
-          id="loanAmount"
-        />
+        <div style="font-size: 32px; font-weight: 700; color: #1e40af;" id="displayAmount">10 000 ₽</div>
       </div>
-      
-      <div>
-        <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #374151;">
-          Срок (дней)
-        </label>
-        <input 
-          type="number" 
-          min="1" 
-          max="14" 
-          value="14"
-          style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 16px;"
-          onchange="calculateLoan()"
-          id="term"
-        />
+      <input 
+        type="range" 
+        min="1000" 
+        max="15000" 
+        step="500"
+        value="10000"
+        style="width: 100%; height: 8px; background: linear-gradient(to right, #1e40af 0%, #1e40af 60%, #e2e8f0 60%, #e2e8f0 100%); border-radius: 8px; outline: none; -webkit-appearance: none;"
+        oninput="updateAmount(this.value)"
+        id="loanAmountSlider"
+      />
+      <div style="display: flex; justify-content: space-between; font-size: 14px; color: #64748b; margin-top: 8px;">
+        <span>1 000 ₽</span>
+        <span>15 000 ₽</span>
       </div>
     </div>
     
-    <div id="results" style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
-        <div style="text-align: center;">
-          <div style="font-size: 14px; color: #6b7280; margin-bottom: 4px;">Сумма займа</div>
-          <div style="font-size: 20px; font-weight: 600; color: #1e40af;" id="resultAmount">10 000 ₽</div>
-        </div>
-        <div style="text-align: center;">
-          <div style="font-size: 14px; color: #6b7280; margin-bottom: 4px;">Переплата</div>
-          <div style="font-size: 20px; font-weight: 600; color: #dc2626;" id="resultInterest">2 100 ₽</div>
-        </div>
-        <div style="text-align: center;">
-          <div style="font-size: 14px; color: #6b7280; margin-bottom: 4px;">К возврату</div>
-          <div style="font-size: 20px; font-weight: 600; color: #059669;" id="resultTotal">12 100 ₽</div>
-        </div>
+    <!-- Срок займа -->
+    <div style="margin-bottom: 32px;">
+      <div style="text-align: center; margin-bottom: 16px;">
+        <label style="font-size: 18px; font-weight: 600; color: #374151; display: block; margin-bottom: 8px;">
+          Срок займа
+        </label>
+        <div style="font-size: 32px; font-weight: 700; color: #1e40af;" id="displayTerm">14 дней</div>
+      </div>
+      <input 
+        type="range" 
+        min="1" 
+        max="14" 
+        step="1"
+        value="14"
+        style="width: 100%; height: 8px; background: linear-gradient(to right, #1e40af 0%, #1e40af 100%, #e2e8f0 100%, #e2e8f0 100%); border-radius: 8px; outline: none; -webkit-appearance: none;"
+        oninput="updateTerm(this.value)"
+        id="termSlider"
+      />
+      <div style="display: flex; justify-content: space-between; font-size: 14px; color: #64748b; margin-top: 8px;">
+        <span>1 день</span>
+        <span>14 дней</span>
       </div>
     </div>
     
-    <div style="text-align: center;">
-      <button 
-        style="background: #1e40af; color: white; padding: 12px 32px; border: none; border-radius: 6px; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.2s;"
-        onmouseover="this.style.background='#1d4ed8'"
-        onmouseout="this.style.background='#1e40af'"
-        onclick="window.open('YOUR_APPLICATION_URL', '_blank')"
-      >
-        Подать заявку
-      </button>
+    <!-- Результат расчета -->
+    <div id="results" style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(59, 130, 246, 0.05) 50%, rgba(34, 197, 94, 0.05) 100%); padding: 24px; border-radius: 16px; border: 2px solid rgba(30, 64, 175, 0.2); margin-bottom: 24px;">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px; color: #1e40af; font-weight: 600; margin-bottom: 16px;">
+          <span>🎯</span>
+          <span>Результат расчёта</span>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+          <div style="text-align: center;">
+            <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;">Получите</div>
+            <div style="font-size: 24px; font-weight: 700; color: #059669;" id="resultReceive">10 000 ₽</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;">Переплата</div>
+            <div style="font-size: 24px; font-weight: 700; color: #ea580c;" id="resultOverpay">2 100 ₽</div>
+          </div>
+        </div>
+        
+        <div style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); padding: 16px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.5);">
+          <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;" id="returnDate">К возврату 05.10.2024</div>
+          <div style="font-size: 32px; font-weight: 700; color: #1e40af;" id="resultTotal">12 100 ₽</div>
+        </div>
+        
+        <div style="display: flex; justify-content: center; gap: 16px; margin-top: 16px; background: rgba(255, 255, 255, 0.5); padding: 12px; border-radius: 8px;">
+          <div style="display: flex; align-items: center; gap: 4px; font-size: 14px; color: #64748b;">
+            <span>%</span>
+            <span>Ставка 1,5% в день</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 4px; font-size: 14px; color: #64748b;">
+            <span>🛡️</span>
+            <span>Без комиссий</span>
+          </div>
+        </div>
+        
+        <button 
+          onclick="submitApplication()"
+          style="width: 100%; margin-top: 16px; height: 48px; background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: 600; cursor: pointer; transition: transform 0.2s;"
+          onmouseover="this.style.transform='scale(1.02)'"
+          onmouseout="this.style.transform='scale(1)'"
+        >
+          📤 Получить займ сейчас
+        </button>
+      </div>
     </div>
   </div>
 </div>
-
 <script>
+// Калькулятор займов - JavaScript функции
+function updateAmount(value) {
+  document.getElementById('displayAmount').textContent = parseInt(value).toLocaleString('ru-RU') + ' ₽';
+  calculateLoan();
+}
+
+function updateTerm(value) {
+  const days = parseInt(value);
+  const dayText = days === 1 ? 'день' : days < 5 ? 'дня' : 'дней';
+  document.getElementById('displayTerm').textContent = days + ' ' + dayText;
+  calculateLoan();
+}
+
 function calculateLoan() {
-  const amount = parseInt(document.getElementById('loanAmount').value) || 10000;
-  const days = parseInt(document.getElementById('term').value) || 14;
+  const amount = parseInt(document.getElementById('loanAmountSlider').value) || 10000;
+  const days = parseInt(document.getElementById('termSlider').value) || 14;
   const rate = 0.015;
   
   const interest = Math.round(amount * rate * days);
   const total = amount + interest;
   
-  document.getElementById('resultAmount').textContent = amount.toLocaleString('ru-RU') + ' ₽';
-  document.getElementById('resultInterest').textContent = interest.toLocaleString('ru-RU') + ' ₽';
+  // Рассчитываем дату возврата
+  const returnDate = new Date();
+  returnDate.setDate(returnDate.getDate() + days);
+  const formattedDate = returnDate.toLocaleDateString('ru-RU');
+  
+  // Обновляем результаты
+  document.getElementById('resultReceive').textContent = amount.toLocaleString('ru-RU') + ' ₽';
+  document.getElementById('resultOverpay').textContent = interest.toLocaleString('ru-RU') + ' ₽';
   document.getElementById('resultTotal').textContent = total.toLocaleString('ru-RU') + ' ₽';
+  document.getElementById('returnDate').textContent = 'К возврату ' + formattedDate;
+  
+  // Обновляем градиенты слайдеров
+  const amountPercent = ((amount - 1000) / (15000 - 1000)) * 100;
+  const termPercent = ((days - 1) / (14 - 1)) * 100;
+  
+  document.getElementById('loanAmountSlider').style.background = 
+    'linear-gradient(to right, #1e40af 0%, #1e40af ' + amountPercent + '%, #e2e8f0 ' + amountPercent + '%, #e2e8f0 100%)';
+  document.getElementById('termSlider').style.background = 
+    'linear-gradient(to right, #1e40af 0%, #1e40af ' + termPercent + '%, #e2e8f0 ' + termPercent + '%, #e2e8f0 100%)';
 }
-</script>`;
+
+function submitApplication() {
+  // Замените YOUR_APPLICATION_URL на ссылку вашей формы заявки
+  window.open('YOUR_APPLICATION_URL', '_blank');
+}
+
+// Инициализация калькулятора при загрузке
+document.addEventListener('DOMContentLoaded', function() {
+  calculateLoan();
+});
+</script>
+
+<!-- Стили для слайдеров -->
+<style>
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #1e40af;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.4);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #1e40af;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 640px) {
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>`;
   };
 
   return (
