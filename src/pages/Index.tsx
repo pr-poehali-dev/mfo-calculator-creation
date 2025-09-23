@@ -1,7 +1,7 @@
-import LoanCalculator from '@/components/LoanCalculator';
+import EmbedCode from '@/components/EmbedCode';
 
 const Index = () => {
-  return <LoanCalculator />;
+  return <EmbedCode />;
 };
 
 export default Index;
