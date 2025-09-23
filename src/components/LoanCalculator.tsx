@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const LoanCalculator = () => {
   const [loanAmount, setLoanAmount] = useState<number>(10000);
-  const [term, setTerm] = useState<number>(14);
+  const [term, setTerm] = useState<number>(7);
 
   // Параметры МФО
   const DAILY_RATE = 0.015; // 1.5% в день
@@ -15,10 +15,10 @@ const LoanCalculator = () => {
     returnDate.setDate(returnDate.getDate() + term);
     const formattedDate = returnDate.toLocaleDateString('ru-RU');
     
-    return { totalAmount, formattedDate };
+    return { totalAmount, totalInterest, formattedDate };
   };
 
-  const { totalAmount, formattedDate } = calculateLoan();
+  const { totalAmount, totalInterest, formattedDate } = calculateLoan();
 
   const handleSubmitApplication = () => {
     window.open('https://www.money-financei.ru/theapplicationisoffline', '_blank');
@@ -35,196 +35,193 @@ const LoanCalculator = () => {
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
     }}>
       <div style={{
-        maxWidth: '800px',
+        maxWidth: '500px',
         width: '100%',
-        background: 'rgba(255, 255, 255, 0.1)',
-        backdropFilter: 'blur(20px)',
+        background: 'white',
         borderRadius: '24px',
-        border: '1px solid rgba(255, 255, 255, 0.2)',
-        padding: '40px',
-        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)'
+        padding: '32px',
+        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.2)'
       }}>
         {/* Заголовок */}
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <div style={{ fontSize: '48px', fontWeight: '700', color: 'white', marginBottom: '16px' }}>
-            💰 Калькулятор займов
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <div style={{ fontSize: '32px', fontWeight: '700', color: '#1e40af', marginBottom: '8px' }}>
+            💰 Займ онлайн
           </div>
-          <div style={{ fontSize: '18px', color: 'rgba(255, 255, 255, 0.8)' }}>
-            Быстрый займ до 15 000 ₽ на карту за 5 минут
-          </div>
-        </div>
-
-        {/* Сумма займа */}
-        <div style={{ marginBottom: '32px' }}>
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'space-between', 
-            marginBottom: '16px',
-            color: 'white',
-            fontSize: '18px',
-            fontWeight: '600'
-          }}>
-            <span>💳 Сумма займа</span>
-            <span>{loanAmount.toLocaleString('ru-RU')} ₽</span>
-          </div>
-          <input
-            type="range"
-            min="1000"
-            max="15000"
-            step="500"
-            value={loanAmount}
-            onChange={(e) => setLoanAmount(Number(e.target.value))}
-            style={{
-              width: '100%',
-              height: '8px',
-              background: 'rgba(255, 255, 255, 0.3)',
-              borderRadius: '4px',
-              outline: 'none',
-              cursor: 'pointer'
-            }}
-          />
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            fontSize: '18px', 
-            color: 'rgba(255, 255, 255, 0.7)', 
-            marginTop: '16px', 
-            padding: '0 20px' 
-          }}>
-            <span>1 000 ₽</span>
-            <span>15 000 ₽</span>
+          <div style={{ fontSize: '16px', color: '#64748b' }}>
+            До 15 000 ₽ за 5 минут
           </div>
         </div>
 
-        {/* Срок займа */}
+        {/* Форма */}
         <div style={{ marginBottom: '32px' }}>
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'space-between', 
-            marginBottom: '16px',
-            color: 'white',
-            fontSize: '18px',
-            fontWeight: '600'
-          }}>
-            <span>📅 Срок займа</span>
-            <span>{term} дней</span>
+          {/* Сумма займа */}
+          <div style={{ marginBottom: '24px' }}>
+            <label style={{ 
+              display: 'block', 
+              fontSize: '16px', 
+              fontWeight: '600', 
+              color: '#374151', 
+              marginBottom: '12px' 
+            }}>
+              Сумма займа: <span style={{ color: '#1e40af', fontSize: '18px' }}>{loanAmount.toLocaleString('ru-RU')} ₽</span>
+            </label>
+            <input
+              type="range"
+              min="1000"
+              max="15000"
+              step="500"
+              value={loanAmount}
+              onChange={(e) => setLoanAmount(Number(e.target.value))}
+              style={{
+                width: '100%',
+                height: '6px',
+                background: '#e5e7eb',
+                borderRadius: '3px',
+                outline: 'none',
+                cursor: 'pointer'
+              }}
+            />
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              fontSize: '14px', 
+              color: '#9ca3af', 
+              marginTop: '8px'
+            }}>
+              <span>1 000 ₽</span>
+              <span>15 000 ₽</span>
+            </div>
           </div>
-          <input
-            type="range"
-            min="1"
-            max="14"
-            step="1"
-            value={term}
-            onChange={(e) => setTerm(Number(e.target.value))}
-            style={{
-              width: '100%',
-              height: '8px',
-              background: 'rgba(255, 255, 255, 0.3)',
-              borderRadius: '4px',
-              outline: 'none',
-              cursor: 'pointer'
-            }}
-          />
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            fontSize: '18px', 
-            color: 'rgba(255, 255, 255, 0.7)', 
-            marginTop: '16px', 
-            padding: '0 20px' 
-          }}>
-            <span>1 день</span>
-            <span>14 дней</span>
+
+          {/* Срок займа */}
+          <div style={{ marginBottom: '24px' }}>
+            <label style={{ 
+              display: 'block', 
+              fontSize: '16px', 
+              fontWeight: '600', 
+              color: '#374151', 
+              marginBottom: '12px' 
+            }}>
+              Срок займа: <span style={{ color: '#1e40af', fontSize: '18px' }}>{term} дней</span>
+            </label>
+            <input
+              type="range"
+              min="1"
+              max="14"
+              step="1"
+              value={term}
+              onChange={(e) => setTerm(Number(e.target.value))}
+              style={{
+                width: '100%',
+                height: '6px',
+                background: '#e5e7eb',
+                borderRadius: '3px',
+                outline: 'none',
+                cursor: 'pointer'
+              }}
+            />
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              fontSize: '14px', 
+              color: '#9ca3af', 
+              marginTop: '8px'
+            }}>
+              <span>1 день</span>
+              <span>14 дней</span>
+            </div>
           </div>
         </div>
         
         {/* Результат расчета */}
         <div style={{
-          background: 'linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(59, 130, 246, 0.05) 50%, rgba(34, 197, 94, 0.05) 100%)',
-          padding: '32px',
-          borderRadius: '20px',
-          border: '2px solid rgba(30, 64, 175, 0.2)'
+          background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
+          padding: '24px',
+          borderRadius: '16px',
+          border: '2px solid #e0f2fe',
+          marginBottom: '24px'
         }}>
           <div style={{ textAlign: 'center' }}>
-            
+            <div style={{ fontSize: '16px', color: '#64748b', marginBottom: '8px' }}>
+              К возврату {formattedDate}
+            </div>
+            <div style={{ fontSize: '48px', fontWeight: '700', color: '#1e40af', marginBottom: '16px' }}>
+              {totalAmount.toLocaleString('ru-RU')} ₽
+            </div>
             <div style={{
-              background: 'rgba(255, 255, 255, 0.8)',
-              backdropFilter: 'blur(10px)',
-              padding: '32px',
-              borderRadius: '20px',
-              border: '2px solid rgba(255, 255, 255, 0.5)',
-              marginBottom: '32px'
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '16px',
+              marginBottom: '16px'
             }}>
-              <div style={{ fontSize: '22px', color: '#64748b', marginBottom: '16px' }}>
-                К возврату {formattedDate}
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '14px', color: '#64748b', marginBottom: '4px' }}>Получите</div>
+                <div style={{ fontSize: '20px', fontWeight: '600', color: '#059669' }}>
+                  {loanAmount.toLocaleString('ru-RU')} ₽
+                </div>
               </div>
-              <div style={{ fontSize: '56px', fontWeight: '700', color: '#1e40af', lineHeight: '1' }}>
-                {totalAmount.toLocaleString('ru-RU')} ₽
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '14px', color: '#64748b', marginBottom: '4px' }}>Переплата</div>
+                <div style={{ fontSize: '20px', fontWeight: '600', color: '#ea580c' }}>
+                  {totalInterest.toLocaleString('ru-RU')} ₽
+                </div>
               </div>
             </div>
-            
             <div style={{
               display: 'flex',
-              flexDirection: 'column',
+              justifyContent: 'center',
               gap: '16px',
-              marginBottom: '32px',
-              background: 'rgba(255, 255, 255, 0.5)',
-              padding: '24px',
-              borderRadius: '16px'
+              fontSize: '14px',
+              color: '#64748b'
             }}>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                fontSize: '20px',
-                color: '#64748b'
-              }}>
-                <span style={{ fontSize: '24px' }}>%</span>
-                <span>Ставка 1,5% в день</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span>%</span>
+                <span>1,5% в день</span>
               </div>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                fontSize: '20px',
-                color: '#64748b'
-              }}>
-                <span style={{ fontSize: '24px' }}>🛡️</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span>🛡️</span>
                 <span>Без комиссий</span>
               </div>
             </div>
-            
-            <button 
-              onClick={handleSubmitApplication}
-              style={{
-                width: '100%',
-                height: '72px',
-                background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '20px',
-                fontSize: '28px',
-                fontWeight: '700',
-                cursor: 'pointer',
-                transition: 'all 0.3s',
-                boxShadow: '0 12px 30px rgba(30, 64, 175, 0.3)'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'scale(1.02)';
-                e.currentTarget.style.boxShadow = '0 16px 40px rgba(30, 64, 175, 0.4)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.boxShadow = '0 12px 30px rgba(30, 64, 175, 0.3)';
-              }}
-            >
-              📤 Получить займ сейчас
-            </button>
           </div>
+        </div>
+
+        {/* Кнопка */}
+        <button 
+          onClick={handleSubmitApplication}
+          style={{
+            width: '100%',
+            height: '56px',
+            background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '16px',
+            fontSize: '18px',
+            fontWeight: '700',
+            cursor: 'pointer',
+            transition: 'all 0.3s',
+            boxShadow: '0 8px 25px rgba(30, 64, 175, 0.3)'
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 12px 35px rgba(30, 64, 175, 0.4)';
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.transform = 'translateY(0px)';
+            e.currentTarget.style.boxShadow = '0 8px 25px rgba(30, 64, 175, 0.3)';
+          }}
+        >
+          📤 Получить займ сейчас
+        </button>
+
+        {/* Дополнительная информация */}
+        <div style={{ 
+          textAlign: 'center', 
+          marginTop: '16px', 
+          fontSize: '12px', 
+          color: '#9ca3af' 
+        }}>
+          Без скрытых комиссий • Деньги на карту за 5 минут
         </div>
       </div>
 
@@ -232,46 +229,62 @@ const LoanCalculator = () => {
         input[type="range"]::-webkit-slider-thumb {
           -webkit-appearance: none;
           appearance: none;
-          width: 32px;
-          height: 32px;
+          width: 24px;
+          height: 24px;
           border-radius: 50%;
           background: #1e40af;
           cursor: pointer;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-          transition: all 0.3s;
+          border: 3px solid white;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          transition: all 0.2s;
         }
 
         input[type="range"]::-webkit-slider-thumb:hover {
-          transform: scale(1.2);
-          box-shadow: 0 6px 20px rgba(30, 64, 175, 0.5);
+          transform: scale(1.1);
+          box-shadow: 0 4px 12px rgba(30, 64, 175, 0.4);
+        }
+
+        input[type="range"]::-webkit-slider-track {
+          background: #e5e7eb;
+          border-radius: 3px;
+          height: 6px;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:active {
+          background: #1d4ed8;
         }
 
         input[type="range"]::-moz-range-thumb {
-          border: none;
-          width: 32px;
-          height: 32px;
+          border: 3px solid white;
+          width: 24px;
+          height: 24px;
           border-radius: 50%;
           background: #1e40af;
           cursor: pointer;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="range"]::-moz-range-track {
+          background: #e5e7eb;
+          border-radius: 3px;
+          height: 6px;
+          border: none;
         }
 
         @media (max-width: 768px) {
-          div[style*="max-width: 800px"] {
-            padding: 20px !important;
+          div[style*="maxWidth: '500px'"] {
+            margin: 0 16px;
+            padding: 24px !important;
           }
-          div[style*="fontSize: '56px'"] {
-            font-size: 40px !important;
+          div[style*="fontSize: '48px'"] {
+            font-size: 36px !important;
           }
-          div[style*="fontSize: '28px'"] {
-            font-size: 22px !important;
+          div[style*="fontSize: '32px'"] {
+            font-size: 28px !important;
           }
-          div[style*="fontSize: '22px'"] {
-            font-size: 18px !important;
-          }
-          button[style*="height: '72px'"] {
-            height: 60px !important;
-            font-size: 22px !important;
+          button[style*="height: '56px'"] {
+            height: 52px !important;
+            font-size: 16px !important;
           }
         }
       `}</style>
