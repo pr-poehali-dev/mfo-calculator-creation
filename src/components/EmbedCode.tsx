@@ -27,7 +27,7 @@ const EmbedCode = () => {
         Сумма займа: <span id="amount-display" style="color: #1e40af; font-size: 18px;">10 000 ₽</span>
       </label>
       <input type="range" id="amount-slider" min="1000" max="15000" step="500" value="10000" 
-             style="width: 100%; height: 6px; background: #e5e7eb; border-radius: 3px; outline: none; cursor: pointer;">
+             style="width: 100%; height: 12px; background: linear-gradient(90deg, #e5e7eb 0%, #e5e7eb 100%); border-radius: 10px; outline: none; cursor: pointer; transition: all 0.3s;">
       <div style="display: flex; justify-content: space-between; font-size: 14px; color: #9ca3af; margin-top: 8px;">
         <span>1 000 ₽</span>
         <span>15 000 ₽</span>
@@ -40,7 +40,7 @@ const EmbedCode = () => {
         Срок займа: <span id="term-display" style="color: #1e40af; font-size: 18px;">7 дней</span>
       </label>
       <input type="range" id="term-slider" min="1" max="14" step="1" value="7"
-             style="width: 100%; height: 6px; background: #e5e7eb; border-radius: 3px; outline: none; cursor: pointer;">
+             style="width: 100%; height: 12px; background: linear-gradient(90deg, #e5e7eb 0%, #e5e7eb 100%); border-radius: 10px; outline: none; cursor: pointer; transition: all 0.3s;">
       <div style="display: flex; justify-content: space-between; font-size: 14px; color: #9ca3af; margin-top: 8px;">
         <span>1 день</span>
         <span>14 дней</span>
@@ -102,42 +102,67 @@ const EmbedCode = () => {
 #loan-calculator-widget input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: #1e40af;
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
   cursor: pointer;
-  border: 3px solid white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.2s;
+  border: 4px solid white;
+  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #loan-calculator-widget input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.4);
+  transform: scale(1.2);
+  box-shadow: 0 8px 25px rgba(30, 64, 175, 0.6);
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+}
+
+#loan-calculator-widget input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.8);
 }
 
 #loan-calculator-widget input[type="range"]::-webkit-slider-track {
-  background: #e5e7eb;
-  border-radius: 3px;
-  height: 6px;
+  background: linear-gradient(90deg, #e5e7eb 0%, #e5e7eb 100%);
+  border-radius: 10px;
+  height: 12px;
+  position: relative;
 }
 
 #loan-calculator-widget input[type="range"]::-moz-range-thumb {
-  border: 3px solid white;
-  width: 24px;
-  height: 24px;
+  border: 4px solid white;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: #1e40af;
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#loan-calculator-widget input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 8px 25px rgba(30, 64, 175, 0.6);
 }
 
 #loan-calculator-widget input[type="range"]::-moz-range-track {
-  background: #e5e7eb;
-  border-radius: 3px;
-  height: 6px;
+  background: linear-gradient(90deg, #e5e7eb 0%, #e5e7eb 100%);
+  border-radius: 10px;
+  height: 12px;
   border: none;
+}
+
+#loan-calculator-widget input[type="range"]:hover::-webkit-slider-track {
+  background: linear-gradient(90deg, #d1d5db 0%, #d1d5db 100%);
+}
+
+#loan-calculator-widget input[type="range"]:focus {
+  outline: none;
+}
+
+#loan-calculator-widget input[type="range"]:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3), 0 4px 16px rgba(30, 64, 175, 0.4);
 }
 
 @media (max-width: 768px) {
