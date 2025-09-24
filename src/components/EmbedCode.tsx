@@ -102,18 +102,33 @@ const EmbedCode = () => {
 #loan-calculator-widget input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
   cursor: pointer;
-  border: 4px solid white;
+  border: 5px solid white;
   box-shadow: 0 4px 16px rgba(30, 64, 175, 0.4);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+#loan-calculator-widget input[type="range"]::-webkit-slider-thumb:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 #loan-calculator-widget input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
   box-shadow: 0 8px 25px rgba(30, 64, 175, 0.6);
   background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
 }
@@ -131,18 +146,19 @@ const EmbedCode = () => {
 }
 
 #loan-calculator-widget input[type="range"]::-moz-range-thumb {
-  border: 4px solid white;
-  width: 32px;
-  height: 32px;
+  border: 5px solid white;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
   cursor: pointer;
   box-shadow: 0 4px 16px rgba(30, 64, 175, 0.4);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
 #loan-calculator-widget input[type="range"]::-moz-range-thumb:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
   box-shadow: 0 8px 25px rgba(30, 64, 175, 0.6);
 }
 
