@@ -99,74 +99,131 @@ const EmbedCode = () => {
 </div>
 
 <style>
-#loan-calculator-widget input[type="range"]::-webkit-slider-thumb {
+/* Современные ползунки - удобные для мобильных и ПК */
+#smart-loan-calc input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  width: 100%;
+  height: 24px;
+  background: transparent;
+  outline: none;
+  border-radius: 16px;
   cursor: pointer;
-  border: 5px solid white;
-  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.4);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  padding: 12px 0;
+  margin: 12px 0;
+  touch-action: none;
 }
 
-#loan-calculator-widget input[type="range"]::-webkit-slider-thumb:before {
-  content: '';
+/* Трек ползунка - толще и современнее */
+#smart-loan-calc input[type="range"]::-webkit-slider-track {
+  height: 24px;
+  background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 100%);
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 
+    inset 0 2px 8px rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(255, 255, 255, 0.8);
+  border: 1px solid #e2e8f0;
+}
+
+/* Крупный ползунок с эмодзи - очень удобный для пальцев */
+#smart-loan-calc input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  cursor: grab;
+  border: 4px solid #3b82f6;
+  box-shadow: 
+    0 12px 40px rgba(59, 130, 246, 0.25),
+    0 6px 20px rgba(0, 0, 0, 0.08),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  margin-top: -20px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Эмодзи внутри ползунка через CSS content */
+#smart-loan-calc #amount-slider::-webkit-slider-thumb::after {
+  content: '💰';
   position: absolute;
+  font-size: 24px;
+  line-height: 1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 18px;
-  height: 18px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
 }
 
-#loan-calculator-widget input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-  box-shadow: 0 8px 25px rgba(30, 64, 175, 0.6);
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+#smart-loan-calc #term-slider::-webkit-slider-thumb::after {
+  content: '📅';
+  position: absolute;
+  font-size: 24px;
+  line-height: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
 }
 
-#loan-calculator-widget input[type="range"]::-webkit-slider-thumb:active {
-  transform: scale(0.95);
-  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.8);
+/* Анимация при наведении - более плавная */
+#smart-loan-calc input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.08);
+  box-shadow: 
+    0 16px 50px rgba(59, 130, 246, 0.3),
+    0 8px 25px rgba(0, 0, 0, 0.12),
+    inset 0 2px 4px rgba(255, 255, 255, 1);
+  border-color: #1e40af;
 }
 
-#loan-calculator-widget input[type="range"]::-webkit-slider-track {
-  background: linear-gradient(90deg, #e5e7eb 0%, #e5e7eb 100%);
-  border-radius: 10px;
-  height: 12px;
-  position: relative;
+/* Анимация при нажатии - тактильная обратная связь */
+#smart-loan-calc input[type="range"]::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(0.92);
+  box-shadow: 
+    0 6px 20px rgba(59, 130, 246, 0.4),
+    0 3px 12px rgba(0, 0, 0, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-#loan-calculator-widget input[type="range"]::-moz-range-thumb {
-  border: 5px solid white;
-  width: 44px;
-  height: 44px;
+/* Firefox поддержка - тот же крупный дизайн */
+#smart-loan-calc input[type="range"]::-moz-range-thumb {
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.4);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  cursor: grab;
+  border: 4px solid #3b82f6;
+  box-shadow: 
+    0 12px 40px rgba(59, 130, 246, 0.25),
+    0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  -moz-appearance: none;
 }
 
-#loan-calculator-widget input[type="range"]::-moz-range-thumb:hover {
-  transform: scale(1.15);
-  box-shadow: 0 8px 25px rgba(30, 64, 175, 0.6);
+#smart-loan-calc input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.08);
+  box-shadow: 
+    0 16px 50px rgba(59, 130, 246, 0.3),
+    0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
-#loan-calculator-widget input[type="range"]::-moz-range-track {
-  background: linear-gradient(90deg, #e5e7eb 0%, #e5e7eb 100%);
-  border-radius: 10px;
-  height: 12px;
-  border: none;
+#smart-loan-calc input[type="range"]::-moz-range-track {
+  height: 24px;
+  background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 100%);
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 #loan-calculator-widget input[type="range"]:hover::-webkit-slider-track {
@@ -181,29 +238,80 @@ const EmbedCode = () => {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3), 0 4px 16px rgba(30, 64, 175, 0.4);
 }
 
+/* Фокус для доступности - важно для клавиатурной навигации */
+#smart-loan-calc input[type="range"]:focus {
+  outline: none;
+}
+
+#smart-loan-calc input[type="range"]:focus::-webkit-slider-thumb {
+  box-shadow: 
+    0 0 0 4px rgba(59, 130, 246, 0.3),
+    0 12px 40px rgba(59, 130, 246, 0.25),
+    0 6px 20px rgba(0, 0, 0, 0.08),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9);
+  outline: none;
+}
+
+/* Адаптивность для мобильных - ещё больше ползунки */
 @media (max-width: 768px) {
-  #loan-calculator-widget > div {
-    margin: 0 16px;
-    padding: 24px !important;
+  #smart-loan-calc > div {
+    margin: 0 12px;
+    padding: 28px !important;
   }
-  #loan-calculator-widget div[style*="font-size: 48px"] {
-    font-size: 36px !important;
+  
+  /* Ползунки на мобильных ещё крупнее */
+  #smart-loan-calc input[type="range"]::-webkit-slider-thumb {
+    width: 72px !important;
+    height: 72px !important;
+    margin-top: -24px !important;
   }
-  #loan-calculator-widget div[style*="font-size: 32px"] {
+  
+  #smart-loan-calc input[type="range"]::-moz-range-thumb {
+    width: 72px !important;
+    height: 72px !important;
+  }
+  
+  /* Трек тоже толще */
+  #smart-loan-calc input[type="range"]::-webkit-slider-track {
+    height: 28px !important;
+  }
+  
+  #smart-loan-calc input[type="range"]::-moz-range-track {
+    height: 28px !important;
+  }
+  
+  /* Увеличиваем эмодзи на мобильных */
+  #smart-loan-calc #amount-slider::-webkit-slider-thumb::after,
+  #smart-loan-calc #term-slider::-webkit-slider-thumb::after {
     font-size: 28px !important;
   }
-  #loan-calculator-widget button {
-    height: 52px !important;
-    font-size: 16px !important;
+  
+  /* Адаптивные размеры текста */
+  #smart-loan-calc div[style*="font-size: 52px"] {
+    font-size: 42px !important;
+  }
+  #smart-loan-calc div[style*="font-size: 36px"] {
+    font-size: 32px !important;
+  }
+  #smart-loan-calc button {
+    height: 60px !important;
+    font-size: 18px !important;
+    font-weight: 800 !important;
+  }
+  
+  /* Увеличиваем отступы между элементами на мобильных */
+  #smart-loan-calc input[type="range"] {
+    padding: 16px 0 !important;
+    margin: 16px 0 !important;
   }
 }
 </style>
 
 <script>
-// Калькулятор займов - JavaScript
-let currentAmount = 10000;
-let currentTerm = 7;
-const DAILY_RATE = 0.015; // 1.5% в день
+// 🚀 Умный калькулятор займов v2.0 - JavaScript
+let currentAmount = 25000;
+let currentTerm = 14;
+const DAILY_RATE = 0.015; // 1.5% в день - выгодная ставка
 
 function calculateLoan() {
   const totalInterest = currentAmount * DAILY_RATE * currentTerm;
