@@ -7,118 +7,77 @@ import Icon from '@/components/ui/icon';
 const EmbedCode = () => {
   const [copied, setCopied] = useState(false);
 
-  const htmlCode = `<!-- 💰 Умный калькулятор займов v2.0 -->
-<!-- Встройка для любого сайта: Тильда, WordPress, Wix -->
-<div id="smart-loan-calc" style="max-width: 520px; margin: 20px auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background: transparent;">
-  <div style="background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); border-radius: 28px; padding: 36px; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.08), 0 10px 40px rgba(0, 0, 0, 0.04); border: 1px solid rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); position: relative; overflow: hidden;">
-    
-    <!-- Декоративные элементы -->
-    <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(30, 64, 175, 0.05)); border-radius: 50%; z-index: 0;"></div>
-    <div style="position: absolute; bottom: -30px; left: -30px; width: 100px; height: 100px; background: linear-gradient(45deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05)); border-radius: 50%; z-index: 0;"></div>
+  const htmlCode = `<!-- Калькулятор займов для встройки на сайт -->
+<div id="loan-calculator-widget" style="max-width: 500px; margin: 20px auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <div style="background: white; border-radius: 24px; padding: 32px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); border: 1px solid #e5e7eb;">
     
     <!-- Заголовок -->
-    <div style="text-align: center; margin-bottom: 36px; position: relative; z-index: 1;">
-      <div style="display: inline-block; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 36px; font-weight: 800; margin-bottom: 12px; text-shadow: none;">
-        💰 Займ за 5 минут
+    <div style="text-align: center; margin-bottom: 32px;">
+      <div style="font-size: 32px; font-weight: 700; color: #1e40af; margin-bottom: 8px;">
+        💰 Займ онлайн
       </div>
-      <div style="font-size: 18px; color: #64748b; font-weight: 500;">
-        💳 До 50 000 ₽ • ⚡ Мгновенное одобрение • 🛡️ Без скрытых комиссий
-      </div>
-      <div style="margin-top: 16px; padding: 8px 16px; background: linear-gradient(90deg, #10b981, #059669); border-radius: 20px; display: inline-block; color: white; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
-        🔥 Лучшие условия
+      <div style="font-size: 16px; color: #64748b;">
+        До 15 000 ₽ за 5 минут
       </div>
     </div>
 
-    <!-- Сумма займа с улучшенным дизайном -->
-    <div style="margin-bottom: 32px; position: relative; z-index: 1;">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-        <label style="font-size: 18px; font-weight: 700; color: #1f2937; display: flex; align-items: center; gap: 8px;">
-          💵 Сумма займа
-        </label>
-        <div style="background: linear-gradient(135deg, #eff6ff, #dbeafe); padding: 8px 16px; border-radius: 12px; border: 1px solid #bfdbfe;">
-          <span id="amount-display" style="color: #1e40af; font-size: 20px; font-weight: 800;">25 000 ₽</span>
-        </div>
-      </div>
-      <div style="position: relative; padding: 8px 0;">
-        <input type="range" id="amount-slider" min="3000" max="50000" step="1000" value="25000" 
-               style="width: 100%; height: 16px; background: linear-gradient(90deg, #e2e8f0 0%, #e2e8f0 100%); border-radius: 12px; outline: none; cursor: pointer; transition: all 0.4s; appearance: none; -webkit-appearance: none;">
-        <div style="position: absolute; top: 0; left: 0; right: 0; height: 16px; background: linear-gradient(90deg, #3b82f6 0%, #1e40af 44%); border-radius: 12px; pointer-events: none; z-index: -1;"></div>
-      </div>
-      <div style="display: flex; justify-content: space-between; font-size: 14px; color: #64748b; margin-top: 12px; font-weight: 500;">
-        <span>3 000 ₽</span>
-        <span style="color: #059669; font-weight: 600;">Рекомендуем</span>
-        <span>50 000 ₽</span>
+    <!-- Сумма займа -->
+    <div style="margin-bottom: 24px;">
+      <label style="display: block; font-size: 16px; font-weight: 600; color: #374151; margin-bottom: 12px;">
+        Сумма займа: <span id="amount-display" style="color: #1e40af; font-size: 18px;">10 000 ₽</span>
+      </label>
+      <input type="range" id="amount-slider" min="1000" max="15000" step="500" value="10000" 
+             style="width: 100%; height: 12px; background: linear-gradient(90deg, #e5e7eb 0%, #e5e7eb 100%); border-radius: 10px; outline: none; cursor: pointer; transition: all 0.3s;">
+      <div style="display: flex; justify-content: space-between; font-size: 14px; color: #9ca3af; margin-top: 8px;">
+        <span>1 000 ₽</span>
+        <span>15 000 ₽</span>
       </div>
     </div>
 
-    <!-- Срок займа с улучшенным дизайном -->
-    <div style="margin-bottom: 32px; position: relative; z-index: 1;">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-        <label style="font-size: 18px; font-weight: 700; color: #1f2937; display: flex; align-items: center; gap: 8px;">
-          📅 Срок займа
-        </label>
-        <div style="background: linear-gradient(135deg, #f0fdf4, #dcfce7); padding: 8px 16px; border-radius: 12px; border: 1px solid #bbf7d0;">
-          <span id="term-display" style="color: #059669; font-size: 20px; font-weight: 800;">14 дней</span>
-        </div>
-      </div>
-      <div style="position: relative; padding: 8px 0;">
-        <input type="range" id="term-slider" min="7" max="30" step="1" value="14"
-               style="width: 100%; height: 16px; background: linear-gradient(90deg, #e2e8f0 0%, #e2e8f0 100%); border-radius: 12px; outline: none; cursor: pointer; transition: all 0.4s; appearance: none; -webkit-appearance: none;">
-        <div style="position: absolute; top: 0; left: 0; right: 0; height: 16px; background: linear-gradient(90deg, #10b981 0%, #059669 47%); border-radius: 12px; pointer-events: none; z-index: -1;"></div>
-      </div>
-      <div style="display: flex; justify-content: space-between; font-size: 14px; color: #64748b; margin-top: 12px; font-weight: 500;">
-        <span>7 дней</span>
-        <span style="color: #0891b2; font-weight: 600;">Оптимально</span>
-        <span>30 дней</span>
+    <!-- Срок займа -->
+    <div style="margin-bottom: 24px;">
+      <label style="display: block; font-size: 16px; font-weight: 600; color: #374151; margin-bottom: 12px;">
+        Срок займа: <span id="term-display" style="color: #1e40af; font-size: 18px;">7 дней</span>
+      </label>
+      <input type="range" id="term-slider" min="1" max="14" step="1" value="7"
+             style="width: 100%; height: 12px; background: linear-gradient(90deg, #e5e7eb 0%, #e5e7eb 100%); border-radius: 10px; outline: none; cursor: pointer; transition: all 0.3s;">
+      <div style="display: flex; justify-content: space-between; font-size: 14px; color: #9ca3af; margin-top: 8px;">
+        <span>1 день</span>
+        <span>14 дней</span>
       </div>
     </div>
 
-    <!-- Результат расчета с премиум дизайном -->
-    <div style="background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%); padding: 32px; border-radius: 24px; border: 2px solid #e2e8f0; margin-bottom: 32px; position: relative; overflow: hidden; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);">
-      <!-- Декоративный элемент -->
-      <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), transparent); border-radius: 50%;"></div>
-      
-      <div style="text-align: center; position: relative; z-index: 1;">
-        <div style="font-size: 16px; color: #64748b; margin-bottom: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;" id="return-date">
-          📅 К возврату через 14 дней
+    <!-- Результат расчета -->
+    <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 24px; border-radius: 16px; border: 2px solid #e0f2fe; margin-bottom: 24px;">
+      <div style="text-align: center;">
+        <div style="font-size: 16px; color: #64748b; margin-bottom: 8px;" id="return-date">
+          К возврату
         </div>
-        <div style="font-size: 52px; font-weight: 900; background: linear-gradient(135deg, #1e40af, #3b82f6); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.1);" id="total-amount">
-          25 525 ₽
+        <div style="font-size: 48px; font-weight: 700; color: #1e40af; margin-bottom: 16px;" id="total-amount">
+          10 000 ₽
         </div>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 24px;">
-          <div style="text-align: center; padding: 16px; background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-radius: 16px; border: 1px solid #a7f3d0;">
-            <div style="font-size: 12px; color: #065f46; margin-bottom: 6px; font-weight: 700; text-transform: uppercase;">💰 Получите</div>
-            <div style="font-size: 22px; font-weight: 800; color: #059669;" id="loan-amount">
-              25 000 ₽
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+          <div style="text-align: center;">
+            <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;">Получите</div>
+            <div style="font-size: 20px; font-weight: 600; color: #059669;" id="loan-amount">
+              10 000 ₽
             </div>
           </div>
-          <div style="text-align: center; padding: 16px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 16px; border: 1px solid #f59e0b;">
-            <div style="font-size: 12px; color: #92400e; margin-bottom: 6px; font-weight: 700; text-transform: uppercase;">📈 Переплата</div>
-            <div style="font-size: 22px; font-weight: 800; color: #d97706;" id="interest-amount">
-              525 ₽
-            </div>
-          </div>
-          <div style="text-align: center; padding: 16px; background: linear-gradient(135deg, #ede9fe, #ddd6fe); border-radius: 16px; border: 1px solid #a78bfa;">
-            <div style="font-size: 12px; color: #5b21b6; margin-bottom: 6px; font-weight: 700; text-transform: uppercase;">📊 Ставка</div>
-            <div style="font-size: 22px; font-weight: 800; color: #7c3aed;" id="daily-rate">
-              1.5%
+          <div style="text-align: center;">
+            <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;">Переплата</div>
+            <div style="font-size: 20px; font-weight: 600; color: #ea580c;" id="interest-amount">
+              1 050 ₽
             </div>
           </div>
         </div>
-        
-        <div style="display: flex; justify-content: center; gap: 24px; font-size: 14px; color: #64748b; flex-wrap: wrap;">
-          <div style="display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: rgba(59, 130, 246, 0.1); border-radius: 20px;">
-            <span>⚡</span>
-            <span style="font-weight: 600;">За 5 минут</span>
+        <div style="display: flex; justify-content: center; gap: 16px; font-size: 14px; color: #64748b;">
+          <div style="display: flex; align-items: center; gap: 4px;">
+            <span>%</span>
+            <span>1,5% в день</span>
           </div>
-          <div style="display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: rgba(16, 185, 129, 0.1); border-radius: 20px;">
+          <div style="display: flex; align-items: center; gap: 4px;">
             <span>🛡️</span>
-            <span style="font-weight: 600;">Без комиссий</span>
-          </div>
-          <div style="display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: rgba(245, 158, 11, 0.1); border-radius: 20px;">
-            <span>📱</span>
-            <span style="font-weight: 600;">На карту</span>
+            <span>Без комиссий</span>
           </div>
         </div>
       </div>
