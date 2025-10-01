@@ -49,9 +49,9 @@ const EmbedCode = () => {
 
     <!-- Кнопка -->
     <button onclick="submitLoanApplication()" 
-            style="width: 100%; height: 64px; background: #dc2626; color: white; border: none; border-radius: 50px; font-size: 22px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3); margin-bottom: 24px;"
-            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 35px rgba(220, 38, 38, 0.4)'"
-            onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 8px 25px rgba(220, 38, 38, 0.3)'">
+            style="width: 100%; height: 64px; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; border: none; border-radius: 50px; font-size: 22px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3); margin-bottom: 24px;"
+            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 35px rgba(59, 130, 246, 0.4)'"
+            onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 8px 25px rgba(59, 130, 246, 0.3)'">
       Получить деньги
     </button>
 
@@ -63,15 +63,15 @@ const EmbedCode = () => {
     <!-- Кнопки авторизации -->
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;">
       <button onclick="loginTBank()" 
-              style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; background: white; border: 2px solid #dc2626; border-radius: 50px; font-size: 16px; font-weight: 600; color: #1f2937; cursor: pointer; transition: all 0.3s;"
-              onmouseover="this.style.background='#fef2f2'"
+              style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; background: white; border: 2px solid #3b82f6; border-radius: 50px; font-size: 16px; font-weight: 600; color: #1f2937; cursor: pointer; transition: all 0.3s;"
+              onmouseover="this.style.background='#eff6ff'"
               onmouseout="this.style.background='white'">
         <span style="font-size: 24px;">🏦</span>
         Т-Банк
       </button>
       <button onclick="loginGosuslugi()" 
-              style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; background: white; border: 2px solid #dc2626; border-radius: 50px; font-size: 16px; font-weight: 600; color: #1f2937; cursor: pointer; transition: all 0.3s;"
-              onmouseover="this.style.background='#fef2f2'"
+              style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; background: white; border: 2px solid #3b82f6; border-radius: 50px; font-size: 16px; font-weight: 600; color: #1f2937; cursor: pointer; transition: all 0.3s;"
+              onmouseover="this.style.background='#eff6ff'"
               onmouseout="this.style.background='white'">
         <span style="font-size: 24px;">🏛️</span>
         Госуслуги
@@ -126,19 +126,19 @@ const EmbedCode = () => {
 #loan-calculator-widget input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 48px;
-  height: 48px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: #1f2937;
+  background: #3b82f6;
   cursor: pointer;
-  border: 5px solid white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 4px solid white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
   transition: all 0.3s;
 }
 
 #loan-calculator-widget input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transform: scale(1.15);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
 
 #loan-calculator-widget input[type="range"]::-webkit-slider-thumb:active {
@@ -146,19 +146,19 @@ const EmbedCode = () => {
 }
 
 #loan-calculator-widget input[type="range"]::-moz-range-thumb {
-  width: 48px;
-  height: 48px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: #1f2937;
+  background: #3b82f6;
   cursor: pointer;
-  border: 5px solid white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 4px solid white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
   transition: all 0.3s;
 }
 
 #loan-calculator-widget input[type="range"]::-moz-range-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transform: scale(1.15);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
 
 #loan-calculator-widget input[type="range"]::-moz-range-thumb:active {
@@ -172,17 +172,41 @@ const EmbedCode = () => {
   border: none;
 }
 
+/* Компактная мобильная версия */
 @media (max-width: 768px) {
   #loan-calculator-widget > div {
-    padding: 24px !important;
+    padding: 20px !important;
+    border-radius: 16px !important;
   }
-  #loan-calculator-widget input[type="range"]::-webkit-slider-thumb {
-    width: 56px;
-    height: 56px;
+  #loan-calculator-widget div[style*="margin-bottom: 32px"] {
+    margin-bottom: 20px !important;
   }
-  #loan-calculator-widget input[type="range"]::-moz-range-thumb {
-    width: 56px;
-    height: 56px;
+  #loan-calculator-widget div[style*="font-size: 24px"] {
+    font-size: 18px !important;
+  }
+  #loan-calculator-widget div[style*="padding: 12px 20px"] {
+    padding: 8px 14px !important;
+    font-size: 18px !important;
+  }
+  #loan-calculator-widget button[style*="height: 64px"] {
+    height: 52px !important;
+    font-size: 18px !important;
+  }
+  #loan-calculator-widget button[style*="padding: 16px"] {
+    padding: 12px !important;
+    font-size: 14px !important;
+  }
+  #loan-calculator-widget div[style*="padding: 20px"] {
+    padding: 14px !important;
+  }
+  #loan-calculator-widget div[style*="font-size: 20px"] {
+    font-size: 18px !important;
+  }
+  #loan-calculator-widget div[style*="font-size: 16px"] {
+    font-size: 14px !important;
+  }
+  #loan-calculator-widget div[style*="gap: 16px"] {
+    gap: 12px !important;
   }
 }
 </style>
