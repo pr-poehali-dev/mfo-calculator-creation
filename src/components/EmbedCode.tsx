@@ -104,19 +104,6 @@ const EmbedCode = () => {
       </div>
     </div>
 
-    <!-- Промокод -->
-    <div style="text-align: center;">
-      <button onclick="togglePromo()" 
-              style="background: none; border: none; border-bottom: 2px dashed #9ca3af; color: #6b7280; font-size: 16px; cursor: pointer; padding: 0; transition: all 0.3s;"
-              onmouseover="this.style.color='#1f2937'"
-              onmouseout="this.style.color='#6b7280'">
-        У меня есть промокод
-      </button>
-      <span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #e5e7eb; border-radius: 50%; color: #6b7280; margin-left: 8px; font-size: 18px; cursor: pointer;">
-        ?
-      </span>
-    </div>
-
   </div>
 </div>
 
@@ -276,10 +263,6 @@ function loginTBank() {
 
 function loginGosuslugi() {
   alert('Авторизация через Госуслуги');
-}
-
-function togglePromo() {
-  alert('Введите промокод');
 }
 
 // Инициализация при загрузке
