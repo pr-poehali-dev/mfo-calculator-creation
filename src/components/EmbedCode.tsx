@@ -11,6 +11,16 @@ const EmbedCode = () => {
 <div id="loan-calculator-widget" style="max-width: 500px; margin: 20px auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
   <div style="background: white; border-radius: 24px; padding: 32px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
     
+    <!-- Таймер получения займа -->
+    <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); padding: 16px 20px; border-radius: 12px; margin-bottom: 24px; text-align: center; border: 1px solid #93c5fd;">
+      <div style="font-size: 14px; color: #1e40af; margin-bottom: 4px; font-weight: 500;">
+        ⏰ Получите деньги уже в
+      </div>
+      <div id="loan-timer" style="font-size: 28px; font-weight: 700; color: #1e40af; letter-spacing: 1px;">
+        00:00
+      </div>
+    </div>
+    
     <!-- Сумма займа -->
     <div style="margin-bottom: 32px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -216,6 +226,20 @@ const EmbedCode = () => {
 let currentAmount = 10000;
 let currentTerm = 7;
 
+// Обновление таймера каждую секунду
+function updateTimer() {
+  const now = new Date();
+  const targetTime = new Date(now.getTime() + 10 * 60 * 1000); // +10 минут
+  
+  const hours = targetTime.getHours().toString().padStart(2, '0');
+  const minutes = targetTime.getMinutes().toString().padStart(2, '0');
+  
+  const timerElement = document.getElementById('loan-timer');
+  if (timerElement) {
+    timerElement.textContent = hours + ':' + minutes;
+  }
+}
+
 function calculateLoan() {
   const returnAmount = currentAmount;
   
@@ -274,6 +298,10 @@ document.addEventListener('DOMContentLoaded', function() {
       updateTerm(this.value);
     });
   }
+  
+  // Обновляем таймер при загрузке и каждую секунду
+  updateTimer();
+  setInterval(updateTimer, 1000);
   
   calculateLoan();
 });
