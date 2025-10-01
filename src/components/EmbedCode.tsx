@@ -9,325 +9,203 @@ const EmbedCode = () => {
 
   const htmlCode = `<!-- Калькулятор займов для встройки на сайт -->
 <div id="loan-calculator-widget" style="max-width: 500px; margin: 20px auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-  <div style="background: white; border-radius: 24px; padding: 32px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); border: 1px solid #e5e7eb;">
+  <div style="background: white; border-radius: 24px; padding: 32px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
     
-    <!-- Заголовок -->
-    <div style="text-align: center; margin-bottom: 32px;">
-      <div style="font-size: 32px; font-weight: 700; color: #1e40af; margin-bottom: 8px;">
-        💰 Займ онлайн
-      </div>
-      <div style="font-size: 16px; color: #64748b;">
-        До 15 000 ₽ за 5 минут
-      </div>
-    </div>
-
     <!-- Сумма займа -->
-    <div style="margin-bottom: 24px;">
-      <label style="display: block; font-size: 16px; font-weight: 600; color: #374151; margin-bottom: 12px;">
-        Сумма займа: <span id="amount-display" style="color: #1e40af; font-size: 18px;">10 000 ₽</span>
-      </label>
-      <input type="range" id="amount-slider" min="1000" max="15000" step="500" value="10000" 
-             style="width: 100%; height: 12px; background: linear-gradient(90deg, #e5e7eb 0%, #e5e7eb 100%); border-radius: 10px; outline: none; cursor: pointer; transition: all 0.3s;">
-      <div style="display: flex; justify-content: space-between; font-size: 14px; color: #9ca3af; margin-top: 8px;">
+    <div style="margin-bottom: 32px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <label style="font-size: 24px; font-weight: 600; color: #1f2937;">
+          Сумма займа
+        </label>
+        <div id="amount-display" style="background: #f3f4f6; border-radius: 12px; padding: 12px 20px; font-size: 24px; font-weight: 700; color: #1f2937;">
+          10 000 ₽
+        </div>
+      </div>
+      <input type="range" id="amount-slider" min="1000" max="30000" step="100" value="10000" 
+             style="width: 100%; height: 8px; background: #e5e7eb; border-radius: 10px; outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
+      <div style="display: flex; justify-content: space-between; font-size: 14px; color: #6b7280; margin-top: 8px;">
         <span>1 000 ₽</span>
-        <span>15 000 ₽</span>
+        <span>30 000 ₽</span>
       </div>
     </div>
 
     <!-- Срок займа -->
-    <div style="margin-bottom: 24px;">
-      <label style="display: block; font-size: 16px; font-weight: 600; color: #374151; margin-bottom: 12px;">
-        Срок займа: <span id="term-display" style="color: #1e40af; font-size: 18px;">7 дней</span>
-      </label>
-      <input type="range" id="term-slider" min="1" max="14" step="1" value="7"
-             style="width: 100%; height: 12px; background: linear-gradient(90deg, #e5e7eb 0%, #e5e7eb 100%); border-radius: 10px; outline: none; cursor: pointer; transition: all 0.3s;">
-      <div style="display: flex; justify-content: space-between; font-size: 14px; color: #9ca3af; margin-top: 8px;">
-        <span>1 день</span>
-        <span>14 дней</span>
+    <div style="margin-bottom: 32px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <label style="font-size: 24px; font-weight: 600; color: #1f2937;">
+          Срок
+        </label>
+        <div id="term-display" style="background: #f3f4f6; border-radius: 12px; padding: 12px 20px; font-size: 24px; font-weight: 700; color: #1f2937;">
+          7 дней
+        </div>
       </div>
-    </div>
-
-    <!-- Результат расчета -->
-    <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 24px; border-radius: 16px; border: 2px solid #e0f2fe; margin-bottom: 24px;">
-      <div style="text-align: center;">
-        <div style="font-size: 16px; color: #64748b; margin-bottom: 8px;" id="return-date">
-          К возврату
-        </div>
-        <div style="font-size: 48px; font-weight: 700; color: #1e40af; margin-bottom: 16px;" id="total-amount">
-          10 000 ₽
-        </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
-          <div style="text-align: center;">
-            <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;">Получите</div>
-            <div style="font-size: 20px; font-weight: 600; color: #059669;" id="loan-amount">
-              10 000 ₽
-            </div>
-          </div>
-          <div style="text-align: center;">
-            <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;">Переплата</div>
-            <div style="font-size: 20px; font-weight: 600; color: #ea580c;" id="interest-amount">
-              1 050 ₽
-            </div>
-          </div>
-        </div>
-        <div style="display: flex; justify-content: center; gap: 16px; font-size: 14px; color: #64748b;">
-          <div style="display: flex; align-items: center; gap: 4px;">
-            <span>%</span>
-            <span>1,5% в день</span>
-          </div>
-          <div style="display: flex; align-items: center; gap: 4px;">
-            <span>🛡️</span>
-            <span>Без комиссий</span>
-          </div>
-        </div>
+      <input type="range" id="term-slider" min="7" max="30" step="1" value="7"
+             style="width: 100%; height: 8px; background: #e5e7eb; border-radius: 10px; outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
+      <div style="display: flex; justify-content: space-between; font-size: 14px; color: #6b7280; margin-top: 8px;">
+        <span>7 дней</span>
+        <span>30 дней</span>
       </div>
     </div>
 
     <!-- Кнопка -->
     <button onclick="submitLoanApplication()" 
-            style="width: 100%; height: 56px; background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; border: none; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);"
-            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 35px rgba(30, 64, 175, 0.4)'"
-            onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 8px 25px rgba(30, 64, 175, 0.3)'">
-      📤 Получить займ сейчас
+            style="width: 100%; height: 64px; background: #dc2626; color: white; border: none; border-radius: 50px; font-size: 22px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3); margin-bottom: 24px;"
+            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 35px rgba(220, 38, 38, 0.4)'"
+            onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 8px 25px rgba(220, 38, 38, 0.3)'">
+      Получить деньги
     </button>
 
     <!-- Дополнительная информация -->
-    <div style="text-align: center; margin-top: 16px; font-size: 12px; color: #9ca3af;">
-      Без скрытых комиссий • Деньги на карту за 5 минут
+    <div style="text-align: center; font-size: 16px; color: #6b7280; margin-bottom: 24px;">
+      Быстрая заявка через Т-Банк или Госуслуги
     </div>
+
+    <!-- Кнопки авторизации -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;">
+      <button onclick="loginTBank()" 
+              style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; background: white; border: 2px solid #dc2626; border-radius: 50px; font-size: 16px; font-weight: 600; color: #1f2937; cursor: pointer; transition: all 0.3s;"
+              onmouseover="this.style.background='#fef2f2'"
+              onmouseout="this.style.background='white'">
+        <span style="font-size: 24px;">🏦</span>
+        Т-Банк
+      </button>
+      <button onclick="loginGosuslugi()" 
+              style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; background: white; border: 2px solid #dc2626; border-radius: 50px; font-size: 16px; font-weight: 600; color: #1f2937; cursor: pointer; transition: all 0.3s;"
+              onmouseover="this.style.background='#fef2f2'"
+              onmouseout="this.style.background='white'">
+        <span style="font-size: 24px;">🏛️</span>
+        Госуслуги
+      </button>
+    </div>
+
+    <!-- Итоговая информация -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background: #f9fafb; border-radius: 16px; margin-bottom: 16px;">
+      <div>
+        <div style="font-size: 14px; color: #6b7280; margin-bottom: 4px;">Вы возвращаете</div>
+        <div style="font-size: 20px; font-weight: 700; color: #1f2937;" id="return-amount">
+          10 000 ₽
+        </div>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 14px; color: #6b7280; margin-bottom: 4px;">До (включительно)</div>
+        <div style="font-size: 16px; font-weight: 600; color: #1f2937;" id="return-date">
+          3 октября, 2025
+        </div>
+      </div>
+    </div>
+
+    <!-- Промокод -->
+    <div style="text-align: center;">
+      <button onclick="togglePromo()" 
+              style="background: none; border: none; border-bottom: 2px dashed #9ca3af; color: #6b7280; font-size: 16px; cursor: pointer; padding: 0; transition: all 0.3s;"
+              onmouseover="this.style.color='#1f2937'"
+              onmouseout="this.style.color='#6b7280'">
+        У меня есть промокод
+      </button>
+      <span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #e5e7eb; border-radius: 50%; color: #6b7280; margin-left: 8px; font-size: 18px; cursor: pointer;">
+        ?
+      </span>
+    </div>
+
   </div>
 </div>
 
 <style>
-/* Современные ползунки - удобные для мобильных и ПК */
-#smart-loan-calc input[type="range"] {
+/* Стили для ползунков */
+#loan-calculator-widget input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 24px;
-  background: transparent;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 10px;
   outline: none;
-  border-radius: 16px;
   cursor: pointer;
-  position: relative;
-  padding: 12px 0;
-  margin: 12px 0;
-  touch-action: none;
 }
 
-/* Трек ползунка - толще и современнее */
-#smart-loan-calc input[type="range"]::-webkit-slider-track {
-  height: 24px;
-  background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 100%);
-  border-radius: 16px;
-  position: relative;
-  box-shadow: 
-    inset 0 2px 8px rgba(0, 0, 0, 0.06),
-    0 1px 2px rgba(255, 255, 255, 0.8);
-  border: 1px solid #e2e8f0;
-}
-
-/* Крупный ползунок с эмодзи - очень удобный для пальцев */
-#smart-loan-calc input[type="range"]::-webkit-slider-thumb {
+#loan-calculator-widget input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-  cursor: grab;
-  border: 4px solid #3b82f6;
-  box-shadow: 
-    0 12px 40px rgba(59, 130, 246, 0.25),
-    0 6px 20px rgba(0, 0, 0, 0.08),
-    inset 0 2px 4px rgba(255, 255, 255, 0.9);
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  position: relative;
-  margin-top: -20px;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #1f2937;
+  cursor: pointer;
+  border: 5px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s;
 }
 
-/* Эмодзи внутри ползунка через CSS content */
-#smart-loan-calc #amount-slider::-webkit-slider-thumb::after {
-  content: '💰';
-  position: absolute;
-  font-size: 24px;
-  line-height: 1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  pointer-events: none;
+#loan-calculator-widget input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
-#smart-loan-calc #term-slider::-webkit-slider-thumb::after {
-  content: '📅';
-  position: absolute;
-  font-size: 24px;
-  line-height: 1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  pointer-events: none;
+#loan-calculator-widget input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(0.95);
 }
 
-/* Анимация при наведении - более плавная */
-#smart-loan-calc input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.08);
-  box-shadow: 
-    0 16px 50px rgba(59, 130, 246, 0.3),
-    0 8px 25px rgba(0, 0, 0, 0.12),
-    inset 0 2px 4px rgba(255, 255, 255, 1);
-  border-color: #1e40af;
-}
-
-/* Анимация при нажатии - тактильная обратная связь */
-#smart-loan-calc input[type="range"]::-webkit-slider-thumb:active {
-  cursor: grabbing;
-  transform: scale(0.92);
-  box-shadow: 
-    0 6px 20px rgba(59, 130, 246, 0.4),
-    0 3px 12px rgba(0, 0, 0, 0.15),
-    inset 0 1px 2px rgba(255, 255, 255, 0.8);
-  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Firefox поддержка - тот же крупный дизайн */
-#smart-loan-calc input[type="range"]::-moz-range-thumb {
-  width: 64px;
-  height: 64px;
+#loan-calculator-widget input[type="range"]::-moz-range-thumb {
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-  cursor: grab;
-  border: 4px solid #3b82f6;
-  box-shadow: 
-    0 12px 40px rgba(59, 130, 246, 0.25),
-    0 6px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  -moz-appearance: none;
+  background: #1f2937;
+  cursor: pointer;
+  border: 5px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s;
 }
 
-#smart-loan-calc input[type="range"]::-moz-range-thumb:hover {
-  transform: scale(1.08);
-  box-shadow: 
-    0 16px 50px rgba(59, 130, 246, 0.3),
-    0 8px 25px rgba(0, 0, 0, 0.12);
+#loan-calculator-widget input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
-#smart-loan-calc input[type="range"]::-moz-range-track {
-  height: 24px;
-  background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 100%);
-  border-radius: 16px;
-  border: 1px solid #e2e8f0;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06);
+#loan-calculator-widget input[type="range"]::-moz-range-thumb:active {
+  transform: scale(0.95);
 }
 
-#loan-calculator-widget input[type="range"]:hover::-webkit-slider-track {
-  background: linear-gradient(90deg, #d1d5db 0%, #d1d5db 100%);
+#loan-calculator-widget input[type="range"]::-moz-range-track {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  border: none;
 }
 
-#loan-calculator-widget input[type="range"]:focus {
-  outline: none;
-}
-
-#loan-calculator-widget input[type="range"]:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3), 0 4px 16px rgba(30, 64, 175, 0.4);
-}
-
-/* Фокус для доступности - важно для клавиатурной навигации */
-#smart-loan-calc input[type="range"]:focus {
-  outline: none;
-}
-
-#smart-loan-calc input[type="range"]:focus::-webkit-slider-thumb {
-  box-shadow: 
-    0 0 0 4px rgba(59, 130, 246, 0.3),
-    0 12px 40px rgba(59, 130, 246, 0.25),
-    0 6px 20px rgba(0, 0, 0, 0.08),
-    inset 0 2px 4px rgba(255, 255, 255, 0.9);
-  outline: none;
-}
-
-/* Адаптивность для мобильных - ещё больше ползунки */
 @media (max-width: 768px) {
-  #smart-loan-calc > div {
-    margin: 0 12px;
-    padding: 28px !important;
+  #loan-calculator-widget > div {
+    padding: 24px !important;
   }
-  
-  /* Ползунки на мобильных ещё крупнее */
-  #smart-loan-calc input[type="range"]::-webkit-slider-thumb {
-    width: 72px !important;
-    height: 72px !important;
-    margin-top: -24px !important;
+  #loan-calculator-widget input[type="range"]::-webkit-slider-thumb {
+    width: 56px;
+    height: 56px;
   }
-  
-  #smart-loan-calc input[type="range"]::-moz-range-thumb {
-    width: 72px !important;
-    height: 72px !important;
-  }
-  
-  /* Трек тоже толще */
-  #smart-loan-calc input[type="range"]::-webkit-slider-track {
-    height: 28px !important;
-  }
-  
-  #smart-loan-calc input[type="range"]::-moz-range-track {
-    height: 28px !important;
-  }
-  
-  /* Увеличиваем эмодзи на мобильных */
-  #smart-loan-calc #amount-slider::-webkit-slider-thumb::after,
-  #smart-loan-calc #term-slider::-webkit-slider-thumb::after {
-    font-size: 28px !important;
-  }
-  
-  /* Адаптивные размеры текста */
-  #smart-loan-calc div[style*="font-size: 52px"] {
-    font-size: 42px !important;
-  }
-  #smart-loan-calc div[style*="font-size: 36px"] {
-    font-size: 32px !important;
-  }
-  #smart-loan-calc button {
-    height: 60px !important;
-    font-size: 18px !important;
-    font-weight: 800 !important;
-  }
-  
-  /* Увеличиваем отступы между элементами на мобильных */
-  #smart-loan-calc input[type="range"] {
-    padding: 16px 0 !important;
-    margin: 16px 0 !important;
+  #loan-calculator-widget input[type="range"]::-moz-range-thumb {
+    width: 56px;
+    height: 56px;
   }
 }
 </style>
 
 <script>
-// 🚀 Умный калькулятор займов v2.0 - JavaScript
-let currentAmount = 25000;
-let currentTerm = 14;
-const DAILY_RATE = 0.015; // 1.5% в день - выгодная ставка
+// Калькулятор займов - JavaScript
+let currentAmount = 10000;
+let currentTerm = 7;
 
 function calculateLoan() {
-  const totalInterest = currentAmount * DAILY_RATE * currentTerm;
-  const totalAmount = currentAmount + totalInterest;
+  const returnAmount = currentAmount;
   
   const returnDate = new Date();
   returnDate.setDate(returnDate.getDate() + currentTerm);
-  const formattedDate = returnDate.toLocaleDateString('ru-RU');
+  
+  const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+  const formattedDate = returnDate.getDate() + ' ' + months[returnDate.getMonth()] + ', ' + returnDate.getFullYear();
   
   // Обновляем интерфейс
   document.getElementById('amount-display').textContent = currentAmount.toLocaleString('ru-RU') + ' ₽';
   document.getElementById('term-display').textContent = currentTerm + ' дней';
-  document.getElementById('loan-amount').textContent = currentAmount.toLocaleString('ru-RU') + ' ₽';
-  document.getElementById('interest-amount').textContent = Math.round(totalInterest).toLocaleString('ru-RU') + ' ₽';
-  document.getElementById('total-amount').textContent = Math.round(totalAmount).toLocaleString('ru-RU') + ' ₽';
-  document.getElementById('return-date').textContent = 'К возврату ' + formattedDate;
+  document.getElementById('return-amount').textContent = returnAmount.toLocaleString('ru-RU') + ' ₽';
+  document.getElementById('return-date').textContent = formattedDate;
 }
 
 function updateAmount(value) {
@@ -341,13 +219,23 @@ function updateTerm(value) {
 }
 
 function submitLoanApplication() {
-  // Открываем форму заявки
   window.open('https://www.money-financei.ru/theapplicationisoffline', '_blank');
+}
+
+function loginTBank() {
+  alert('Авторизация через Т-Банк ID');
+}
+
+function loginGosuslugi() {
+  alert('Авторизация через Госуслуги');
+}
+
+function togglePromo() {
+  alert('Введите промокод');
 }
 
 // Инициализация при загрузке
 document.addEventListener('DOMContentLoaded', function() {
-  // Привязываем обработчики событий
   const amountSlider = document.getElementById('amount-slider');
   const termSlider = document.getElementById('term-slider');
   
@@ -363,7 +251,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Первоначальный расчет
   calculateLoan();
 });
 </script>`;
